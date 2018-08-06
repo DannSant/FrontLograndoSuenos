@@ -1,0 +1,35 @@
+<div class="container main-container">
+
+
+
+    <div class="row" *ngIf="!_userService.isAuthenticated()">
+        <div class="col-md-7">
+            <h2>Iniciar sesion</h2>
+            <form #f="ngForm" (ngSubmit)="loginUser(f)" ngNativeValidation>
+                <div class="form-group">
+                    <label for="email">Correo electronico</label>
+                    <input type="email" name="email" [(ngModel)]="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Ingresar email" required>
+
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" [(ngModel)]="password" class="form-control" id="password" placeholder="Ingresar Password" required>
+                </div>
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" name="remember" [(ngModel)]="remember" id="remember">
+                    <label class="form-check-label" for="remember">Recordar credenciales</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Ingresar</button>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="row" *ngIf="_userService.isAuthenticated()">
+        <div class="col-md-7">
+            <h3>Bienvenido a Logrando Sueños 7</h3>
+
+            <span>Empieza a lograr tus sueños <a routerLink="/register">aqui</a>  </span>
+        </div>
+    </div>
+</div>
