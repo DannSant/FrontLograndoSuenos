@@ -7,7 +7,6 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatFormFieldModule,MatInputModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FileUploadModule } from 'ng2-file-upload/file-upload/file-upload.module';
 
 //componentes
 import { AppComponent } from './app.component';
@@ -26,10 +25,20 @@ import { BankService } from './services/bank.service';
 import { AssociateService } from './services/associate.service';
 import { StatesService } from './services/states.service';
 import { SubirArchivoService } from './services/subir-archivo.service';
+import { LoginGuard } from './services/guards/login.guard';
+import { AdminGuard } from './services/guards/admin.guard';
 
+//Pipes
+import { ImagenPipe } from './pipes/imagen.pipe';
+
+//Otros
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { ImagenPipe } from './pipes/imagen.pipe';
+import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
+import { NewUserComponent } from './pages/new-user/new-user.component';
+
+
+
 
 
 
@@ -43,7 +52,9 @@ registerLocaleData(localeEs);
     HomeComponent,
     RegisterComponent,
     BoucherUploadComponent,
-    ImagenPipe
+    ImagenPipe,
+    DownloadDatabaseComponent,
+    NewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -55,8 +66,7 @@ registerLocaleData(localeEs);
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,    
-    BrowserAnimationsModule,
-    FileUploadModule
+    BrowserAnimationsModule    
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },
@@ -65,7 +75,9 @@ registerLocaleData(localeEs);
     BankService,
     AssociateService,
     StatesService,
-    SubirArchivoService
+    SubirArchivoService,
+    LoginGuard,
+    AdminGuard
   ],
   bootstrap: [AppComponent]
 })

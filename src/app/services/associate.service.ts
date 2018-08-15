@@ -15,7 +15,11 @@ export class AssociateService {
 
   createAssociate(associate:Associate){
     let url = SERVICE_URL + "/associate";
-    return this.http.post(url,associate).catch((e)=>{      
+    return this.http.post(url,associate).catch((e)=>{        
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }  
       let errorMessage = e.error.error.message;
       console.error(errorMessage);
       if(e.status==500){
@@ -30,7 +34,28 @@ export class AssociateService {
 
   getAssociate(id:string){
     let url = SERVICE_URL+"/associate?id=" + id;
-    return this.http.get(url).catch((e)=>{      
+    return this.http.get(url).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      
+      this._alert.showAlert("Error al obtener datos","Ha ocurrido al recuperar los datos del afiliado, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      
+    
+      return Observable.throw(e);
+    });
+  }
+
+  listAssociates(){
+    let url = SERVICE_URL+"/associate/all";
+    return this.http.get(url).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
       let errorMessage = e.error.error.message;
       console.error(errorMessage);
       

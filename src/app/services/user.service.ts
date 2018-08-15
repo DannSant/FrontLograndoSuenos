@@ -60,6 +60,15 @@ export class UserService {
      }
    }
 
+   isAdmin():boolean{
+     if(!this.loggedUser){
+       return false;
+     }else {
+      return this.loggedUser.role=="ADMIN_ROLE";
+     }
+     
+   }
+
    cargarStorage(){
     if(localStorage.getItem('token')){
       this.token = localStorage.getItem("token");      
@@ -98,7 +107,11 @@ export class UserService {
         this.loggedUser=null;
       }
       return resp;
-    }).catch((e)=>{      
+    }).catch((e)=>{   
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
       let errorMessage = e.error.error.message;
       this._alert.showAlert("Error al iniciar sesion",errorMessage,"error");
       return Observable.throw(e);
@@ -117,11 +130,15 @@ export class UserService {
   crearUsuario(user:User){
     let url = SERVICE_URL + "/user";
    
-    return this.http.post(url,user).catch((e)=>{      
+    return this.http.post(url,user).catch((e)=>{  
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }     
       let errorMessage = e.error.error.message;
       console.error(errorMessage);
       if(e.status==409){
-        this._alert.showAlert("Error","Ha ocurrido un error al crear el masajista, el email "+user.email.toUpperCase()+" está ya registrado en la base de datos","error");
+        this._alert.showAlert("Error","Ha ocurrido un error al usuario, el email "+user.email.toUpperCase()+" está ya registrado en la base de datos","error");
       }else {
         this._alert.showAlert("Error al crear usuario","Ha ocurrido al crear usuario, intente nuevamente despues de recargar la pagina","error");
       }

@@ -15,7 +15,7 @@
 
                 <!-- MOVIL DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': cellphone.errors && cellphone.touched}">
-                    <label for="cellphone">Telefono</label>
+                    <label for="cellphone">Celular</label>
                     <input type="text" name="cellphone" [(ngModel)]="associate.cellphone" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar Telefono" #cellphone="ngModel" required maxlength=10>
                     <div class="alert alert-danger" *ngIf="cellphone.errors?.required && cellphone.touched">
                         <small>Este campo es requerido</small>

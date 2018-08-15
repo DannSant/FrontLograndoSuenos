@@ -1,0 +1,51 @@
+<div class="container main-container">
+    <div class="row">
+        <h1>Nuevo usuario</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <form #f="ngForm" (ngSubmit)="createUser(f)" ngNativeValidation>
+                <!-- Usuario DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': email.errors?.required && email.touched}">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Ingresar email" #email="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="email.errors?.required && email.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- NOMBRE DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': name.errors?.required && name.touched}">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Ingresar nombre" #name="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- User DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': username.errors?.required && username.touched}">
+                    <label for="username">Usuario</label>
+                    <input type="text" name="username" [(ngModel)]="user.username" class="form-control" placeholder="Ingresar usuario" #username="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="username.errors?.required && username.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- Password DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': password.errors?.required && password.touched}">
+                    <label for="password">Usuario</label>
+                    <input type="text" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Ingresar contraseña" #password="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="password.errors?.required && password.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Crear </button>
+
+
+            </form>
+        </div>
+
+    </div>
+</div>

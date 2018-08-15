@@ -1,0 +1,28 @@
+<div class="container main-container">
+    <h2>Descargar la base de datos</h2>
+    <br>
+    <span>Los siguientes registros en la base van a ser descargados</span>
+    <button class="btn btn-success" (click)="download()">Descargar ahora</button>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Pago Realizado</th>
+                        <th scope="col">Banco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let associate of associates">
+                        <th>{{associate.id}}</th>
+                        <td>{{associate.name}}</td>
+                        <td>{{associate.payAmmount}}</td>
+                        <td>{{associate.bank.name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
