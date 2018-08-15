@@ -129,8 +129,10 @@ export class UserService {
 
   crearUsuario(user:User){
     let url = SERVICE_URL + "/user";
-   
-    return this.http.post(url,user).catch((e)=>{  
+    let headers = new HttpHeaders({token:this.token})
+    console.log(this.token)
+    return this.http.post(url,user,{headers}).catch((e)=>{  
+      this._alert.closeWaitWindow();
       if (!e.error.error){
         console.log(e); 
         return

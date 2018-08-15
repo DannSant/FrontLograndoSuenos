@@ -34,7 +34,7 @@
 
                 <!-- Password DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': password.errors?.required && password.touched}">
-                    <label for="password">Usuario</label>
+                    <label for="password">Contraseña</label>
                     <input type="text" name="password" [(ngModel)]="user.password" class="form-control" placeholder="Ingresar contraseña" #password="ngModel" required>
                     <div class="alert alert-danger" *ngIf="password.errors?.required && password.touched">
                         <small>Este campo es requerido</small>

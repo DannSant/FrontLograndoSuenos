@@ -6,6 +6,7 @@ import { DownloadDatabaseComponent } from './pages/download-database/download-da
 import { LoginGuard } from './services/guards/login.guard';
 import { AdminGuard } from './services/guards/admin.guard';
 import { NewUserComponent } from './pages/new-user/new-user.component';
+import { ViewUserComponent } from './pages/view-user/view-user.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -19,6 +20,11 @@ const app_routes: Routes = [
   { 
     path: 'newUser',
     component: NewUserComponent ,
+    canActivate: [AdminGuard]
+  },
+  { 
+    path: 'viewUser/:id',
+    component: ViewUserComponent ,
     canActivate: [AdminGuard]
   },
 

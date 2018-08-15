@@ -6,7 +6,8 @@ import { Associate } from '../../models/associate.model';
 import { Bank } from '../../models/bank.model';
 import { NgForm } from '../../../../node_modules/@angular/forms';
 import { StatesService } from '../../services/states.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserService } from '../../services/user.service';
 
 
 @Component({
@@ -30,14 +31,40 @@ export class RegisterComponent implements OnInit {
   associate:Associate={};
 
   errors:string="";
+  phase:string="init";
 
   constructor(
     public _alert:AlertService,
     public _banks:BankService,
     public _associates:AssociateService,
     public _states:StatesService,
-    public router:Router
-  ) { }
+    public router:Router,
+    public activatedRoute:ActivatedRoute,
+    public _userService:UserService
+  ) { 
+    
+  }
+  /*
+  checkForUser(){
+    this.activatedRoute.params.subscribe((params:any)=>{
+      let id = params.id;
+      if(!id){
+        this.phase="nouser";
+        return;
+      }
+      this.phase="normal";
+      this._userService.getUser(id).subscribe((resp:any)=>{
+       
+        if(resp.ok){
+          this.associate.email = resp.data.email;
+        }else {
+          this._alert.showAlert("Error","Error al recuperar datos del usuario","error");
+          this.associate.email=null;
+        }
+      })
+    });
+  }*/
+  
 
   ngOnInit() {
     this._banks.loadAllBanks().subscribe((resp:any)=>{

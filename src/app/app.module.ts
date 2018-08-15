@@ -7,6 +7,7 @@ import { HttpClientModule } from '../../node_modules/@angular/common/http';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatFormFieldModule,MatInputModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatTooltipModule} from '@angular/material/tooltip'
 
 //componentes
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
 import { NewUserComponent } from './pages/new-user/new-user.component';
+import { ViewUserComponent } from './pages/view-user/view-user.component';
 
 
 
@@ -54,7 +56,8 @@ registerLocaleData(localeEs);
     BoucherUploadComponent,
     ImagenPipe,
     DownloadDatabaseComponent,
-    NewUserComponent
+    NewUserComponent,
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +69,8 @@ registerLocaleData(localeEs);
     MatNativeDateModule,
     MatFormFieldModule,
     MatInputModule,    
-    BrowserAnimationsModule    
+    BrowserAnimationsModule    ,
+    MatTooltipModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },
