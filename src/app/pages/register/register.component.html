@@ -1,5 +1,5 @@
 <div class="container main-container">
-    
+
     <div class="row">
         <div class="col-md-7">
             <h2>Registrate</h2>
@@ -10,6 +10,15 @@
                     <label for="name">Nombre</label>
                     <input type="text" name="name" [(ngModel)]="associate.name" class="form-control" placeholder="Ingresar nombre" #name="ngModel" required>
                     <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- EMAIL DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': personalEmail.errors?.required && personalEmail.touched}">
+                    <label for="personalEmail">Nombre</label>
+                    <input type="email" name="personalEmail" [(ngModel)]="associate.personalEmail" class="form-control" placeholder="Ingresar email personal" #personalEmail="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="personalEmail.errors?.required && personalEmail.touched">
                         <small>Este campo es requerido</small>
                     </div>
                 </div>

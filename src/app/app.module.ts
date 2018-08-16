@@ -36,8 +36,9 @@ import { ImagenPipe } from './pipes/imagen.pipe';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
-import { NewUserComponent } from './pages/new-user/new-user.component';
-import { ViewUserComponent } from './pages/view-user/view-user.component';
+import { NewUserComponent } from './pages/users/new-user/new-user.component';
+import { ViewUserComponent } from './pages/users/view-user/view-user.component';
+import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 
 
 
@@ -57,7 +58,8 @@ registerLocaleData(localeEs);
     ImagenPipe,
     DownloadDatabaseComponent,
     NewUserComponent,
-    ViewUserComponent
+    ViewUserComponent,
+    NewAssociatesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,4 @@
+import { Associate } from './associate.model';
 export class User {
     constructor(
         public name?:string,
@@ -5,6 +6,7 @@ export class User {
         public role?:string,
         public password?:string,
         public username?:string,
-        public _id?:string
+        public _id?:string,
+        public associate?:Associate
     ){}
 }

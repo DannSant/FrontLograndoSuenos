@@ -5,8 +5,9 @@ import { BoucherUploadComponent } from './pages/boucher-upload/boucher-upload.co
 import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
 import { LoginGuard } from './services/guards/login.guard';
 import { AdminGuard } from './services/guards/admin.guard';
-import { NewUserComponent } from './pages/new-user/new-user.component';
-import { ViewUserComponent } from './pages/view-user/view-user.component';
+import { NewUserComponent } from './pages/users/new-user/new-user.component';
+import { ViewUserComponent } from './pages/users/view-user/view-user.component';
+import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -18,7 +19,12 @@ const app_routes: Routes = [
     canActivate: [AdminGuard]
   },
   { 
-    path: 'newUser',
+    path: 'newAssociates',
+    component: NewAssociatesComponent ,
+    canActivate: [AdminGuard]
+  },
+  { 
+    path: 'newUser/:associate_id',
     component: NewUserComponent ,
     canActivate: [AdminGuard]
   },

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { User } from '../../models/user.model';
-import { UserService } from '../../services/user.service';
-import { AlertService } from '../../services/alert.service';
+import { User } from '../../../models/user.model';
+import { UserService } from '../../../services/user.service';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-view-user',

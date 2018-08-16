@@ -3,6 +3,7 @@ export class Associate {
         public id?:number,
         public name?:string,
         public email?:string, 
+        public personalEmail?:string, 
         public cellphone?:string,
         public bank?:string,
         public account?:string, 

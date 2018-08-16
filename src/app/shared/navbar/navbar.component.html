@@ -20,8 +20,8 @@
                  Afiliados
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Alta</a>
-                    <a class="dropdown-item" href="#">Modificar</a>
+                    <a class="dropdown-item" routerLink="/newAssociates">Nuevos afiliados</a>
+                    <a class="dropdown-item" href="#">Lista afiliados</a>
                 </div>
             </li>
             <li class="nav-item dropdown" *ngIf="_userService.isAdmin()">

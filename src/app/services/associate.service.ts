@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Associate } from '../models/associate.model';
 import { SERVICE_URL } from '../config/config';
 import { AlertService } from './alert.service';
 import { Observable } from 'rxjs/Rx';
+import { UserService } from './user.service';
 
 @Injectable()
 export class AssociateService {
 
   constructor(
     public http:HttpClient,
-    public _alert:AlertService
+    public _alert:AlertService,
+    public _userService:UserService
   ) { }
 
   createAssociate(associate:Associate){
@@ -52,6 +54,24 @@ export class AssociateService {
   listAssociates(){
     let url = SERVICE_URL+"/associate/all";
     return this.http.get(url).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      
+      this._alert.showAlert("Error al obtener datos","Ha ocurrido al recuperar los datos del afiliado, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      
+    
+      return Observable.throw(e);
+    });
+  }
+
+  getNewAssociates(){
+    let url = SERVICE_URL+"/associate/new";
+    let headers = new HttpHeaders({token:this._userService.token})
+    return this.http.get(url,{headers}).catch((e)=>{ 
       if (!e.error.error){
         console.log(e); 
         return
