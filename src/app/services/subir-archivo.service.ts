@@ -23,11 +23,12 @@ export class SubirArchivoService {
         }else {
           if(xhr.response!=''){
            
-            // console.log(xhr);
-            // console.log(xhr.response);
-            // console.log(xhr.status);
+             //console.log(xhr);
+             //console.log(xhr.response);
+             //console.log(xhr.status);
             if(xhr.status!=200){
               console.log("fallo la subida");
+              console.error(xhr.response);
               //reject(xhr.response);
             }           
           }         

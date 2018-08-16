@@ -64,10 +64,11 @@ export class RegisterComponent implements OnInit {
       })
     });
   }*/
-  
+
 
   ngOnInit() {
     this._banks.loadAllBanks().subscribe((resp:any)=>{
+      
       if(resp.ok){
         this.banks=resp.data;
       }else {

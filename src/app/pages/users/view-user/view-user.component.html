@@ -16,17 +16,7 @@
           <tr>
               <th scope="row">Usuario</th>
               <td>{{user.username}}</td>
-          </tr>
-          <tr>
-              <th scope="row">Liga</th>
-              <td mat-raised-button
-                  matTooltip="Comparte esta liga con el afiliado para que se registre"
-                  matTooltipPosition="after"
-                  matTooltipClass="medium-tooltip">
-                  {{user.associateLink}}
-              </td>
-              <td> <a class="btn btn-success" (click)="copyToClipboard(user.associateLink)"><i class="fas fa-paste"></i></a></td>
-          </tr>
+          </tr>         
           <tr>
               <th scope="row">Controles</th>
               <td>
