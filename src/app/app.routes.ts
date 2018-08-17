@@ -8,11 +8,19 @@ import { AdminGuard } from './services/guards/admin.guard';
 import { NewUserComponent } from './pages/users/new-user/new-user.component';
 import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
+import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
+import { ProfileComponent } from './pages/users/profile/profile.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
   { path: 'register', component: RegisterComponent }, 
   { path: 'boucher/:id', component: BoucherUploadComponent }, 
+  { path: 'welcomeAssociate/:id', component: WelcomeAssociateComponent },
+  { 
+    path: 'profile/:id', 
+    component: ProfileComponent,
+    canActivate:[LoginGuard]
+  }, 
   { 
     path: 'downloadDB',
     component: DownloadDatabaseComponent ,

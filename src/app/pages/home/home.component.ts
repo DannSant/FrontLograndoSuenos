@@ -35,7 +35,7 @@ export class HomeComponent implements OnInit {
     let remember = f.value.remember;
 
     this._userService.login(email,password,remember).subscribe((resp)=>{
-      console.log(resp);
+      
       if(resp.ok){
         //this.router.navigate(['/services']);
       }else {

@@ -50,14 +50,14 @@ export class DownloadDatabaseComponent implements OnInit {
         nombre:associate.name,
         PagoRealizado:associate.payAmmount,
         banco:associate.bank.name,
-        cuenta:associate.account,
-        clabe:associate.clabe,
-        tarjeta:associate.card,
+        cuenta:associate.account.toString(),
+        clabe:associate.clabe.toString(),
+        tarjeta:associate.card.toString(),
         curp:associate.curp,
         rfc:associate.rfc,
-        movil:associate.cellphone,
+        movil:associate.cellphone.toString(),
         domicilio:associate.address,
-        estado:associate.state
+        estado:associate.state.name
       }
       db.push(row);
     } 

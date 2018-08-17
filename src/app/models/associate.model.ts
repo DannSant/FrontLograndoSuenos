@@ -1,4 +1,5 @@
 import { Bank } from './bank.model';
+import { State } from './state.model';
 export class Associate {
     constructor(
         public id?:number,
@@ -19,7 +20,7 @@ export class Associate {
         public paymentDate?:Date,
         public paymentNumber?:string,
         public paymentBaucher?:string,
-        public state?: string, 
+        public state?: State, 
         public creationDate?:Date,
         public _id?:string
     ){}

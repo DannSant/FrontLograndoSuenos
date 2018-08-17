@@ -43,10 +43,8 @@ export class BoucherUploadComponent implements OnInit {
   subirImagen(){
     this._alert.showWaitWindow("Cargando","Espera un momento, estamos subiendo la imagen");
     this._subirArchivoService.subirArchivo(this.imagenSubir,this.associate._id)
-      .then((resp)=>{                
-        this._alert.showAlert("Todo bien!","Gracias por registrarte en Logrando Sueños 7","success");
-        this.router.navigate(['/home']);
-
+      .then((resp)=>{  
+        this.router.navigate(['/welcomeAssociate',this.associate._id]);
       })
       .catch((error)=>{
         console.log(error);

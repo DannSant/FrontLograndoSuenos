@@ -115,9 +115,9 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="state">Estado</label>
                     </div>
-                    <select name="state" [(ngModel)]="associate.state" (ngModelChange)="errors=''" class="custom-select" id="selectedState" #state="ngModel">
+                    <select name="state" [(ngModel)]="associate.state._id" (ngModelChange)="errors=''" class="custom-select" id="selectedState" #state="ngModel">
                       <option selected value="0">Seleccione...</option>
-                      <option *ngFor="let state of states" [value]="state.code">{{state.name}}</option>                    
+                      <option *ngFor="let state of states" [value]="state._id">{{state.name}}</option>                    
                     </select>
                 </div>
                 <div class="alert alert-danger" *ngIf="errors=='MISSING_STATE'">
@@ -147,6 +147,9 @@
                     <br>
                     <div class="alert alert-danger" *ngIf="birthDate.errors?.required && birthDate.touched">
                         <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf=" errors=='UNDER_AGED'">
+                        <small>El afiliado debe ser mayor de edad (18 años)</small>
                     </div>
                 </div>
 

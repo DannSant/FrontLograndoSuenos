@@ -39,6 +39,8 @@ import { DownloadDatabaseComponent } from './pages/download-database/download-da
 import { NewUserComponent } from './pages/users/new-user/new-user.component';
 import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
+import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
+import { ProfileComponent } from './pages/users/profile/profile.component';
 
 
 
@@ -59,7 +61,9 @@ registerLocaleData(localeEs);
     DownloadDatabaseComponent,
     NewUserComponent,
     ViewUserComponent,
-    NewAssociatesComponent
+    NewAssociatesComponent,
+    WelcomeAssociateComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

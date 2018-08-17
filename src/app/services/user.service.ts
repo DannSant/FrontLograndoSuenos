@@ -43,7 +43,11 @@ export class UserService {
         this.logout(); 
       }
       return resp;
-    }).catch((e)=>{      
+    }).catch((e)=>{     
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }  
       let errorMessage = e.error.error.message;
       console.error(errorMessage);
       this._alert.showAlert("Sesion Expirada","Vuelva a iniciar sesion","error");
