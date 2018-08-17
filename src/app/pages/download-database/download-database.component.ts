@@ -22,6 +22,7 @@ export class DownloadDatabaseComponent implements OnInit {
     this._alert.showWaitWindow("Cargando","Estamos extrayendo la informacion de la base de datos, esto puede tardar unos momentos");
     this._associates.listAssociates().subscribe((resp:any)=>{
       this._alert.closeWaitWindow();
+     
       if(resp.ok){
         this.associates=resp.data;
       }
@@ -29,7 +30,38 @@ export class DownloadDatabaseComponent implements OnInit {
   }
 
   download(){
-    new Angular5Csv(this.associates, 'Base');
+    let db = this.generateDB();
+    new Angular5Csv(
+      db, 
+      'Base',
+      {
+        showLabels:true,
+        headers: ['NUM','NOMBRE','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO']
+      }
+      
+    );
+  }
+
+  generateDB(){
+    let db:any[] = []
+    for (let associate of this.associates){
+      let row = {
+        num:associate.id,
+        nombre:associate.name,
+        PagoRealizado:associate.payAmmount,
+        banco:associate.bank.name,
+        cuenta:associate.account,
+        clabe:associate.clabe,
+        tarjeta:associate.card,
+        curp:associate.curp,
+        rfc:associate.rfc,
+        movil:associate.cellphone,
+        domicilio:associate.address,
+        estado:associate.state
+      }
+      db.push(row);
+    } 
+    return db;
   }
 
 }

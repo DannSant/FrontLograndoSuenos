@@ -15,12 +15,9 @@
                 </div>
 
                 <!-- EMAIL DEL ASOCIADO -->
-                <div class="form-group" [ngClass]="{'has-danger': personalEmail.errors?.required && personalEmail.touched}"
-                    mat-raised-button
-                    matTooltip="En este correo te proporcionaremos tus datos de usuario, por lo que debe de ser un correo válido"
-                    matTooltipPosition="after"
+                <div class="form-group" [ngClass]="{'has-danger': personalEmail.errors?.required && personalEmail.touched}" mat-raised-button matTooltip="En este correo te proporcionaremos tus datos de usuario, por lo que debe de ser un correo válido" matTooltipPosition="after"
                     matTooltipClass="medium-tooltip">
-                    
+
                     <label for="personalEmail">Correo personal</label>
                     <input type="email" name="personalEmail" [(ngModel)]="associate.personalEmail" class="form-control" placeholder="Ingresar email personal" #personalEmail="ngModel" required>
                     <div class="alert alert-danger" *ngIf="personalEmail.errors?.required && personalEmail.touched">
@@ -47,7 +44,7 @@
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inputGroupSelect01">Banco</label>
                     </div>
-                    <select name="bank" [(ngModel)]="associate.bank" (ngModelChange)="errors=''" class="custom-select" id="inputGroupSelect01" #bank="ngModel">
+                    <select name="bank" [(ngModel)]="associate.bank._id" (ngModelChange)="errors=''" class="custom-select" id="inputGroupSelect01" #bank="ngModel">
                       <option selected value="0">Seleccione...</option>
                       <option *ngFor="let bank of banks" [value]="bank._id">{{bank.name}}</option>                    
                     </select>

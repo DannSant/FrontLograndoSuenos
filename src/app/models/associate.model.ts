@@ -1,3 +1,4 @@
+import { Bank } from './bank.model';
 export class Associate {
     constructor(
         public id?:number,
@@ -5,7 +6,7 @@ export class Associate {
         public email?:string, 
         public personalEmail?:string, 
         public cellphone?:string,
-        public bank?:string,
+        public bank?:Bank,
         public account?:string, 
         public clabe?: string, 
         public card?: string,

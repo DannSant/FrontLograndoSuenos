@@ -30,7 +30,9 @@ export class NewUserComponent implements OnInit {
         this._associates.getAssociate(associateId).subscribe((resp:any)=>{
           if(resp.ok){
             this.user.associate=resp.data;
-            this.user.name=resp.data.name;           
+            this.user.name=resp.data.name;
+            this.user.username=resp.data.id;
+            this.user.password="lograndosuenos7";           
           }
         })
       }
@@ -50,6 +52,8 @@ export class NewUserComponent implements OnInit {
     this._userService.crearUsuario(this.user).subscribe((resp:any)=>{
       this._alert.closeWaitWindow();
       if (resp.ok){
+        //Enviar email
+        this._userService.sendWelcomeMail(this.user,this.user.associate.personalEmail).subscribe();
         //redireccionar a pantalla con el link
         let id = resp.data._id;
         this.router.navigate(['/viewUser',id]);

@@ -1,4 +1,4 @@
-<div class="container main-container">
+<div class="big-container">
     <div class="row" *ngIf="associates.length<=0">
         <div class="col-md-12">
             <div class="alert alert-warning" role="alert">
@@ -49,6 +49,41 @@
                         <tr>
                             <td>Clabe:</td>
                             <td> {{selectedAssociate.clabe}}</td>
+                        </tr>
+                        <tr>
+                            <td>Numero de tarjeta:</td>
+                            <td> {{selectedAssociate.card}}</td>
+                        </tr>
+                        <tr>
+                            <td>CURP:</td>
+                            <td> {{selectedAssociate.curp}}</td>
+                        </tr>
+                        <tr>
+                            <td>RFC:</td>
+                            <td> {{selectedAssociate.rfc}}</td>
+                        </tr>
+                        <tr>
+                            <td>RFC:</td>
+                            <td> {{selectedAssociate.rfc}}</td>
+                        </tr>
+                        <tr>
+                            <td>Direccion:</td>
+                            <td> {{selectedAssociate.address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de nacimiento:</td>
+                            <td> {{selectedAssociate.birthDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Fecha de registro:</td>
+                            <td> {{selectedAssociate.creationDate}}</td>
+                        </tr>
+                        <tr>
+                            <td>Monto de pago:</td>
+                            <td> ${{selectedAssociate.payAmmount}}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2"><img [src]="selectedAssociate.paymentBaucher | imagen" class="w350"></td>
                         </tr>
                     </table>
                 </div>

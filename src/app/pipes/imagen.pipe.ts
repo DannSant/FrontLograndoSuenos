@@ -16,6 +16,7 @@ export class ImagenPipe implements PipeTransform {
       return img;
     }
     url = url + "/" + img;
+   
     return url;
   }
 

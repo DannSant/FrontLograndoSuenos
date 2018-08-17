@@ -130,7 +130,7 @@ export class UserService {
   crearUsuario(user:User){
     let url = SERVICE_URL + "/user";
     let headers = new HttpHeaders({token:this.token})
-    console.log(this.token)
+    //console.log(this.token)
     return this.http.post(url,user,{headers}).catch((e)=>{  
       this._alert.closeWaitWindow();
       if (!e.error.error){
@@ -185,6 +185,23 @@ export class UserService {
     return this.http.post(url,user,{headers}).catch((e)=>{      
       let errorMessage = e.error.error.message;
       this._alert.showAlert("Error","Ha ocurrido un error al borrar el usuario en la base de datos. Intenta recargar la pagina","error");
+      return Observable.throw(e);
+    });
+  }
+
+  sendWelcomeMail(user:User, personalEmail:string){
+    let url = SERVICE_URL + "/email/welcome";
+    let headers = new HttpHeaders({token:this.token});
+    let body = {
+      userEmail:user.email,
+      personalEmail:personalEmail,
+      userName:user.name,
+      userUserName:user.username,
+      userPassword:user.password
+    }
+    return this.http.post(url,body,{headers}).catch((e)=>{      
+      let errorMessage = e.error.error.message;
+      this._alert.showAlert("Error","Ha ocurrido un error al enviar el email de notificacion","error");
       return Observable.throw(e);
     });
   }

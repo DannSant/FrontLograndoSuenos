@@ -89,12 +89,12 @@ export class RegisterComponent implements OnInit {
     });
 
     this.associate.state="0";
-    this.associate.bank="0";
+    this.associate.bank = {_id:"0"};    
   }
 
   register(f:NgForm){
 
-    if(this.associate.bank=="0"){
+    if(this.associate.bank._id=="0"){
       this.errors="MISSING_BANK";
       return;
     }
@@ -120,7 +120,7 @@ export class RegisterComponent implements OnInit {
     }
 
     this._associates.createAssociate(this.associate).subscribe((resp:any)=>{
-      console.log(resp);
+      //console.log(resp);
       if(resp.ok){
         let id = resp.data._id;
         this.router.navigate(['/boucher',id]);

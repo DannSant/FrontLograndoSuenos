@@ -10,11 +10,21 @@
     width: 150px
 }
 
-.medium-tooltip{
+.w350 {
+    width: 350px
+}
+
+.medium-tooltip {
     font-size: 17px;
 }
 
-.medium-tooltip-danger{
+.medium-tooltip-danger {
     font-size: 17px;
     background: #b71c1c;
+}
+
+.big-container {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
