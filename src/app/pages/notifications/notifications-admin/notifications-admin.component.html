@@ -1,0 +1,51 @@
+<div class="container main-container">
+    <h1>Administrar notificaciones</h1>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card border-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Filtros</h5>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Estatus</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                          <option value="1" selected>Todas</option>                        
+                          <option value="2">Activas</option>
+                          <option value="3">Inactivas</option>
+                        </select>
+                    </div>
+                    <input type="text" placeholder="usuario">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <label class="form-check-label" for="defaultCheck1">
+                          Broadcast
+                        </label>
+                    </div>
+                    <a href="#" class="btn btn-danger">Quitar filtros</a>
+                    <a href="#" class="btn btn-primary">Aplicar</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card border-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Mostrando</h5>
+                    <p class="card-text">Notificaciones activas</p>
+                    <p class="card-text">Para: Todos</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card" *ngFor="let notification of notifications">
+        <div class="card-header">
+            Ya no recibimos correos
+        </div>
+        <div class="card-body">
+            <p class="card-text">A partir del dia de mañana ya no recibiremos correos</p>
+            <a href="#" class="btn btn-primary">Modificar</a>
+            <a href="#" class="btn btn-danger">Desactivar</a>
+        </div>
+    </div>
+</div>

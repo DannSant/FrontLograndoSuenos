@@ -10,6 +10,7 @@ import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
 import { ProfileComponent } from './pages/users/profile/profile.component';
+import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -39,6 +40,11 @@ const app_routes: Routes = [
   { 
     path: 'viewUser/:id',
     component: ViewUserComponent ,
+    canActivate: [AdminGuard]
+  },
+  { 
+    path: 'notificationsAdmin',
+    component: NotificationsAdminComponent ,
     canActivate: [AdminGuard]
   },
 

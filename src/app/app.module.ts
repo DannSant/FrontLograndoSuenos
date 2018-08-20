@@ -28,6 +28,7 @@ import { StatesService } from './services/states.service';
 import { SubirArchivoService } from './services/subir-archivo.service';
 import { LoginGuard } from './services/guards/login.guard';
 import { AdminGuard } from './services/guards/admin.guard';
+import { NotificationService } from './services/notification.service';
 
 //Pipes
 import { ImagenPipe } from './pipes/imagen.pipe';
@@ -41,6 +42,10 @@ import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
 import { ProfileComponent } from './pages/users/profile/profile.component';
+import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
+import { NotificationComponent } from './pages/notifications/notification/notification.component';
+import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
+
 
 
 
@@ -63,7 +68,10 @@ registerLocaleData(localeEs);
     ViewUserComponent,
     NewAssociatesComponent,
     WelcomeAssociateComponent,
-    ProfileComponent
+    ProfileComponent,
+    NotificationsAdminComponent,
+    NotificationComponent,
+    NotificationsFeedComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,8 @@ registerLocaleData(localeEs);
     StatesService,
     SubirArchivoService,
     LoginGuard,
-    AdminGuard
+    AdminGuard,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
