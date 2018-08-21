@@ -1,33 +1,38 @@
 <div class="container main-container">
     <h1>Administrar notificaciones</h1>
-    <div class="row">
-        <div class="col-sm-6">
+    <a class="btn btn-primary" data-toggle="collapse" href="#filters" role="button" aria-expanded="false" aria-controls="filters">Filtros</a>
+    <button type="button" class="btn btn-outline-primary" style="float: right;"> <i class="fas fa-plus"></i>Nueva notificacion</button>
+
+    <div class="row collapse" id="filters">
+        <div class="col-sm-9">
             <div class="card border-primary mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">Filtros</h5>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label class="input-group-text" for="inputGroupSelect01">Estatus</label>
                         </div>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select class="custom-select" id="inputGroupSelect01" [(ngModel)]="status">
                           <option value="1" selected>Todas</option>                        
                           <option value="2">Activas</option>
                           <option value="3">Inactivas</option>
                         </select>
                     </div>
-                    <input type="text" placeholder="usuario">
+                    <input type="text" placeholder="usuario" [(ngModel)]="user">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" [(ngModel)]="isBroadcast">
                         <label class="form-check-label" for="defaultCheck1">
                           Broadcast
                         </label>
                     </div>
-                    <a href="#" class="btn btn-danger">Quitar filtros</a>
-                    <a href="#" class="btn btn-primary">Aplicar</a>
+                    <a class="btn btn-danger" (click)="resetFilter()">Quitar filtros</a>
+                    <a class="btn btn-primary" (click)="populateNotifications()">Aplicar</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
             <div class="card border-info mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Mostrando</h5>
@@ -40,10 +45,10 @@
 
     <div class="card" *ngFor="let notification of notifications">
         <div class="card-header">
-            Ya no recibimos correos
+            {{notification.title}}
         </div>
         <div class="card-body">
-            <p class="card-text">A partir del dia de mañana ya no recibiremos correos</p>
+            <p class="card-text">{{notification.text}}</p>
             <a href="#" class="btn btn-primary">Modificar</a>
             <a href="#" class="btn btn-danger">Desactivar</a>
         </div>
