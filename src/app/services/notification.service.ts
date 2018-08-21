@@ -4,6 +4,7 @@ import { AlertService } from './alert.service';
 import { SERVICE_URL } from '../config/config';
 import { UserService } from './user.service';
 import { Observable } from 'rxjs/Rx';
+import { Notification } from '../models/notification.model';
 
 @Injectable()
 export class NotificationService {
@@ -31,7 +32,17 @@ export class NotificationService {
 
     let headers = new HttpHeaders({token:this._userService.token})
 
-    return this.http.get(url,{headers}).catch((e)=>{  
+    return this.http.get(url,{headers}).catch(this.getCatchFunction("Error al obtener notificaciones"));
+  }
+
+  createNotification(notification:Notification){
+   let url = SERVICE_URL + "/notificacion";   
+   let headers = new HttpHeaders({token:this._userService.token});
+   return this.http.post(url,notification,{headers}).catch(this.getCatchFunction("Error al crear notificacion"));
+  }
+
+  getCatchFunction(errorMessage:String){
+    let f = (e)=>{
       this._alert.closeWaitWindow();
       if (!e.error.error){
         console.log(e); 
@@ -39,13 +50,13 @@ export class NotificationService {
       }     
       let errorMessage = e.error.error.message;
       console.error(errorMessage);      
-      this._alert.showAlert("Error al crear usuario","Ha ocurrido al obtener la informacion, intente nuevamente despues de recargar la pagina","error");
+      this._alert.showAlert("Error",errorMessage,"error");
       
     
       return Observable.throw(e);
-    });
-    
+    };
 
+    return f;
   }
 
 }

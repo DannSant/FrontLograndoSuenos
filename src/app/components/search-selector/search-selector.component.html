@@ -1,0 +1,8 @@
+<div class="dropdown">
+  <button (click)="showDropdown()" class="dropbtn">Buscar...</button>
+    <div id="selectFilter" class="dropdown-content">
+      <input type="text" placeholder="Escriba nombre de usuario" id="searchFilter" (keyup)="filterFunction()" name="desc" [(ngModel)]="selectedElement.desc">
+      <a (click)="selectUser(element)" *ngFor="let element of elementsData">{{element.desc}}</a>      
+    </div>
+  </div>
+  <input class="form-check-input" style="margin-left: 30px;" type="text" placeholder="usuario" readonly [(ngModel)]="selectedElement.desc">

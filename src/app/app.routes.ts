@@ -11,6 +11,7 @@ import { NewAssociatesComponent } from './pages/associates/new-associates/new-as
 import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
 import { ProfileComponent } from './pages/users/profile/profile.component';
 import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
+import { NotificationComponent } from './pages/notifications/notification/notification.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -47,7 +48,11 @@ const app_routes: Routes = [
     component: NotificationsAdminComponent ,
     canActivate: [AdminGuard]
   },
-
+  { 
+    path: 'notification/:id',
+    component: NotificationComponent ,
+    canActivate: [AdminGuard]
+  },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationService } from '../../../services/notification.service';
 import { AlertService } from '../../../services/alert.service';
+import { User } from '../../../models/user.model';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-notifications-admin',
@@ -10,19 +12,34 @@ import { AlertService } from '../../../services/alert.service';
 export class NotificationsAdminComponent implements OnInit {
   notifications:Notification[] = [];
   filter:any = {};
-  
+  usersFilter:any[]=[]; 
   //parametros de busqueda
   status:number;
   user:string;
   isBroadcast:boolean;
+  
 
   //paginacion
   fromPag:number=0;
 
   constructor(
     public _notifications:NotificationService,
-    public _alert:AlertService
-  ) { }
+    public _alert:AlertService,
+    public _userService:UserService
+  ) {
+    this._userService.loadAllUsers().subscribe((resp:any)=>{
+      if(resp.ok){
+        for(let user of resp.data){
+          this.usersFilter.push({
+            _id:user._id,
+            desc:user.name
+          })
+        }
+      }
+    })
+   }
+
+  
 
   ngOnInit() {
     this.populateNotifications();
@@ -30,7 +47,7 @@ export class NotificationsAdminComponent implements OnInit {
 
   populateNotifications(){
     this.buildFilterObject();
-    
+    console.log(this.filter)
     this._notifications.getNotifications(this.filter,this.fromPag).subscribe((resp:any)=>{
      
       if(resp.ok){
@@ -65,6 +82,10 @@ export class NotificationsAdminComponent implements OnInit {
 
   resetFilter(){
     this.filter={};
+  }
+
+  setSelectedUser(user:any){
+    this.user = user._id;   
   }
 
 

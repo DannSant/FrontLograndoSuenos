@@ -45,6 +45,7 @@ import { ProfileComponent } from './pages/users/profile/profile.component';
 import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
 import { NotificationComponent } from './pages/notifications/notification/notification.component';
 import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
+import { SearchSelectorComponent } from './components/search-selector/search-selector.component';
 
 
 
@@ -71,7 +72,8 @@ registerLocaleData(localeEs);
     ProfileComponent,
     NotificationsAdminComponent,
     NotificationComponent,
-    NotificationsFeedComponent
+    NotificationsFeedComponent,
+    SearchSelectorComponent
   ],
   imports: [
     BrowserModule,
