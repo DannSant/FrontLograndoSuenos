@@ -1,71 +1,71 @@
 <div class="container main-container">
-  <div class="row">
-      <h1>Nueva notificación</h1>
-  </div>
-  <div class="row">
-      <div class="col-md-7">
-          <form #f="ngForm" (ngSubmit)="createNotification(f)" ngNativeValidation>
-              <!-- TITULO DE LA NOTIFICACION-->
-              <div class="form-group" [ngClass]="{'has-danger': title.errors?.required && title.touched}">
-                  <label for="title">Titulo</label>
-                  <input type="text" name="title" [(ngModel)]="notification.title" class="form-control" placeholder="Ingresar titulo" #title="ngModel" required>
-                  <div class="alert alert-danger" *ngIf="title.errors?.required && title.touched">
-                      <small>Este campo es requerido</small>
-                  </div>
-              </div>
+    <div class="row">
+        <h1>Nueva notificación</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-7">
+            <form #f="ngForm" (ngSubmit)="saveNotification(f)" ngNativeValidation>
+                <!-- TITULO DE LA NOTIFICACION-->
+                <div class="form-group" [ngClass]="{'has-danger': title.errors?.required && title.touched}">
+                    <label for="title">Titulo</label>
+                    <input type="text" name="title" [(ngModel)]="notification.title" class="form-control" placeholder="Ingresar titulo" #title="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="title.errors?.required && title.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
 
-              <!-- TIPO DE NOTIFICACION -->
-              <div class="form-group">
-                <label>Tipo</label>
-                <br>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="typeText">
+                <!-- TIPO DE NOTIFICACION -->
+                <div class="form-group">
+                    <label>Tipo</label>
+                    <br>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="typeText">
                     Texto
                   </label>
-                    <input [(ngModel)]="notification.type" class="form-check-input" type="radio" name="type" id="typeText" value="T" checked>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label" for="typeFile">
+                        <input [(ngModel)]="notification.type" class="form-check-input" type="radio" name="type" id="typeText" value="T" checked>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <label class="form-check-label" for="typeFile">
                     Archivo
                   </label>
-                    <input [(ngModel)]="notification.type" class="form-check-input" type="radio" name="type" id="typeFile" value="F">
+                        <input [(ngModel)]="notification.type" class="form-check-input" type="radio" name="type" id="typeFile" value="F">
+                    </div>
                 </div>
-              </div>
 
-              <!-- TEXTO DE NOTIFICACION (SI ES TEXTO) -->
-              <div class="form-group" *ngIf="notification.type=='T'" [ngClass]="{'has-danger': text.errors?.required && text.touched}">
-                  <label for="text">Texto</label>
-                  <textarea type="text" name="text" [(ngModel)]="notification.text" class="form-control" #text="ngModel"></textarea>
-                  <div class="alert alert-danger" *ngIf="text.errors?.required && text.touched">
-                      <small>Este campo es requerido</small>
-                  </div>
-              </div>
-
-                 <!-- TEXTO DE NOTIFICACION (SI ES ARCHIVO) -->
-              <div class="custom-file" *ngIf="notification.type=='F'" [ngClass]="{'has-danger': textFile.errors?.required && textFile.touched}">
-                <input type="file" name="textFile" (change)="selectFile($event.target.files[0])" [(ngModel)]="selectedFile" class="custom-file-input" id="customFile" #textFile="ngModel" lang="es">
-                <label class="custom-file-label" for="customFile">Elegir archivo</label>
-                <label *ngIf="selectedFile" for="textFile">Archivo elegido: {{selectedFile.name}}</label>
-                <div class="alert alert-danger" *ngIf="textFile.errors?.required && textFile.touched">
-                  <small>Este campo es requerido</small>
+                <!-- TEXTO DE NOTIFICACION (SI ES TEXTO) -->
+                <div class="form-group" *ngIf="notification.type=='T'" [ngClass]="{'has-danger': text.errors?.required && text.touched}">
+                    <label for="text">Contenido</label>
+                    <textarea type="text" name="text" [(ngModel)]="notification.text" class="form-control" #text="ngModel"></textarea>
+                    <div class="alert alert-danger" *ngIf="text.errors?.required && text.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
                 </div>
-              </div>
 
-              <!--USUARIO DE NOTIFICACION-->
-              <app-search-selector [elementsdata]="usersFilter" (selectedUser)="selectUser($event)"></app-search-selector>
+                <!-- TEXTO DE NOTIFICACION (SI ES ARCHIVO) -->
+                <div class="custom-file" *ngIf="notification.type=='F'">
+                    <input type="file" name="textFile" (change)="selectFile($event.target.files[0])" class="custom-file-input" id="customFile" lang="es">
+                    <label class="custom-file-label" for="customFile">Elegir archivo</label>
+                    <label *ngIf="selectedFile" for="textFile">Archivo elegido: {{selectedFile.name}}</label>
+                </div>
 
-              <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="broadcast" name="broadcast" [(ngModel)]="notification.broadcast" (ngModelChange)="selectBroadcast()">
-                <label class="form-check-label" for="defaultCheck1">
+                <hr>
+                <br>
+                <br>
+                <!--USUARIO DE NOTIFICACION-->
+                <app-search-selector [elementsdata]="usersFilter" (selectedUser)="selectUser($event)"></app-search-selector>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="broadcast" name="broadcast" [(ngModel)]="notification.broadcast" (ngModelChange)="selectBroadcast()">
+                    <label class="form-check-label" for="defaultCheck1">
                   Broadcast
                 </label>
-              </div>
+                </div>
 
-              <button type="submit" class="btn btn-primary">Generar </button>
+                <button type="submit" class="btn btn-primary">Generar </button>
 
 
-          </form>
-      </div>
+            </form>
+        </div>
 
-  </div>
+    </div>
 </div>

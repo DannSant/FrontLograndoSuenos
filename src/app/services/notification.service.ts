@@ -35,11 +35,26 @@ export class NotificationService {
     return this.http.get(url,{headers}).catch(this.getCatchFunction("Error al obtener notificaciones"));
   }
 
+  getNotification(id:string){
+    let url = SERVICE_URL + `/notification?id=${id}`;
+
+
+    let headers = new HttpHeaders({token:this._userService.token})
+
+    return this.http.get(url,{headers}).catch(this.getCatchFunction("Error al obtener notificaciones"));
+  }
+
   createNotification(notification:Notification){
-   let url = SERVICE_URL + "/notificacion";   
+   let url = SERVICE_URL + "/notification";   
    let headers = new HttpHeaders({token:this._userService.token});
    return this.http.post(url,notification,{headers}).catch(this.getCatchFunction("Error al crear notificacion"));
   }
+
+  updateNotification(notification:Notification){
+    let url = SERVICE_URL + "/notification/" + notification._id;   
+    let headers = new HttpHeaders({token:this._userService.token});
+    return this.http.put(url,notification,{headers}).catch(this.getCatchFunction("Error al actualizar notificacion"));
+   }
 
   getCatchFunction(errorMessage:String){
     let f = (e)=>{

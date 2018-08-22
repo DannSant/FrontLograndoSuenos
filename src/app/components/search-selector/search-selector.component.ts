@@ -97,4 +97,8 @@ resetSelection(){
     this.selectedElement={};
 }
 
+setElement(newElement:any){
+    this.selectedElement=newElement;
+}
+
 }

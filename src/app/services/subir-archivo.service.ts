@@ -6,7 +6,7 @@ export class SubirArchivoService {
 
   constructor() { }
 
-  subirArchivo(archivo:File,id:string,route="baucher"){
+  subirArchivo(archivo:File,id:string,route="baucher",method="PUT"){
    
     return new Promise((resolve,reject)=>{
       let formData = new FormData();
@@ -34,8 +34,14 @@ export class SubirArchivoService {
           }         
         }
       };
-      let url=SERVICE_URL +'/baucher/'+id;
-      xhr.open('PUT',url,true);
+      let url="";
+      if(id){
+        url=SERVICE_URL +'/'+route+'/'+id;
+      }else {
+        url=SERVICE_URL +'/'+route;
+      }
+      
+      xhr.open(method,url,true);
       xhr.send( formData );
     });
    
