@@ -50,9 +50,11 @@
             {{notification.title}}
         </div>
         <div class="card-body">
-            <p class="card-text">{{notification.text}}</p>
-            <a href="#" class="btn btn-primary">Modificar</a>
-            <a href="#" class="btn btn-danger">Desactivar</a>
+            <p class="card-text"><span class="badge badge-secondary">Contenido:</span>{{notification.text}}</p>
+            <p class="card-text"><span class="badge badge-secondary">Estatus:</span> {{notification.status | statusHandler:'activo'}}</p>
+            <p class="card-text"><span class="badge badge-secondary">Es broadcast:</span> {{notification.broadcast | statusHandler:'si'}}</p>
+            <a [routerLink]="['/notification',notification._id]" class="btn btn-primary">Modificar</a>
+            <button (click)="deleteNotification(notification)" class="btn btn-danger">Desactivar</button>
         </div>
     </div>
 </div>

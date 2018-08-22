@@ -73,7 +73,7 @@ export class BoucherUploadComponent implements OnInit {
     let urlImagenTemp = reader.readAsDataURL(archivo);
     reader.onloadend = ()=>{
       //console.log(reader.result);
-      this.imagenTemp=reader.result;
+      this.imagenTemp=reader.result.toString();
     }
 
   }

@@ -46,8 +46,7 @@ export class NotificationsAdminComponent implements OnInit {
   }
 
   populateNotifications(){
-    this.buildFilterObject();
-    console.log(this.filter)
+    this.buildFilterObject();   
     this._notifications.getNotifications(this.filter,this.fromPag).subscribe((resp:any)=>{
      
       if(resp.ok){
@@ -86,6 +85,21 @@ export class NotificationsAdminComponent implements OnInit {
 
   setSelectedUser(user:any){
     this.user = user._id;   
+  }
+
+  deleteNotification(notification:Notification){
+    this._notifications.deleteNotification(notification).subscribe((resp:any)=>{
+      if(resp.ok){
+        this._alert.showAlert("Todo bien","La notificacion des deshabilitó con exito","success");
+        this.populateNotifications();
+      }
+    })
+  }
+
+  getShowTags(type:string):string{
+    let resp = "";
+
+    return resp;
   }
 
 

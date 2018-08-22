@@ -56,6 +56,12 @@ export class NotificationService {
     return this.http.put(url,notification,{headers}).catch(this.getCatchFunction("Error al actualizar notificacion"));
    }
 
+   deleteNotification(notification:Notification){
+    let url = SERVICE_URL + "/notification/delete/" + notification._id;   
+    let headers = new HttpHeaders({token:this._userService.token});
+    return this.http.post(url,notification,{headers}).catch(this.getCatchFunction("Error al crear notificacion"));
+   }
+
   getCatchFunction(errorMessage:String){
     let f = (e)=>{
       this._alert.closeWaitWindow();
