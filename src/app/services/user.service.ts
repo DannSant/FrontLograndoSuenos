@@ -56,6 +56,24 @@ export class UserService {
     });
    }
 
+   renuevaToken(){
+    let url = SERVICE_URL + "/renewToken";
+    let headers = new HttpHeaders({
+     'token':this.token
+    });
+
+    return this.http.get(url,{headers}).map((resp:any)=>{      
+      this.guardarStorage(this.loggedUser._id,resp.token,this.loggedUser);
+      return true;
+    }).catch((e)=>{
+     let errorMessage= e.error.error.message;       
+     this._alert.showAlert('Error al renovar token ',errorMessage,"error")
+     this.logout();
+    return Observable.throw (e);
+    
+   });
+  }
+
    isAuthenticated():boolean{
      if (this.loggedUser){
        return true;

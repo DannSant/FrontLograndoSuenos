@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -24,22 +24,43 @@ export class PaginationComponent implements OnInit {
       this.pages[i] = i;
     }
     this.fromPag=0;
+
+    setTimeout(()=>{
+       this.setInitialPage();
+     },5000)
     
+  }
+
+  setInitialPage(){
+    let page=0;
+    this.fromPag = page*this.pageSize;
+    let pages:NodeListOf<HTMLElement>;
+    pages=document.getElementsByName("page");
+    Array.from(pages).forEach((page:HTMLElement,index:number)=>{
+      page.classList.remove("active");
+    });
+
+    let selectedPage = document.getElementById("page" + page);
+    if(selectedPage){
+      selectedPage.classList.add("active");
+    }
   }
 
   changePage(page:number){
     this.fromPag = page*this.pageSize;
     let pages:NodeListOf<HTMLElement>;
     pages=document.getElementsByName("page");
-    pages.forEach((page:HTMLElement,index:number)=>{
+    Array.from(pages).forEach((page:HTMLElement,index:number)=>{
       page.classList.remove("active");
     });
 
     let selectedPage = document.getElementById("page" + page);
+    if(selectedPage.classList){
+      selectedPage.classList.add("active");
 
-    selectedPage.classList.add("active");
-
-    this.onPageChange.emit(this.fromPag);
+      this.onPageChange.emit(this.fromPag);
+    }
+    
     
   }
 

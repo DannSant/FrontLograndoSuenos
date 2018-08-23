@@ -1,9 +1,16 @@
 <div class="container main-container">
 
-
-
-    <div class="row" *ngIf="!_userService.isAuthenticated()">
-        <div class="col-md-7">
+    <div class="row" >
+        <div class="col-md-5">
+               <u> <h1 style="text-align: center;">Quienes somos</h1></u>
+                <h3>Un grupo de emprendedores independientes
+                trabajando en equipo para un bien común con Mexicanos Unidos. </h3>
+                <br>              
+                <h3>Súmate al equipo, sé protagonista.</h3>
+                <hr>
+                <h1>LOGRANDO SUEÑOS 7</h1>
+        </div>
+        <div class="col-md-7 card" *ngIf="!_userService.isAuthenticated()">
             <h2>Iniciar sesion</h2>
             <form #f="ngForm" (ngSubmit)="loginUser(f)" ngNativeValidation>
                 <div class="form-group">
@@ -22,14 +29,10 @@
                 <button type="submit" class="btn btn-primary">Ingresar</button>
             </form>
         </div>
-
-    </div>
-
-    <div class="row" *ngIf="_userService.isAuthenticated()">
-        <div class="col-md-7">
-            <h3>Bienvenido a Logrando Sueños 7</h3>
-
-            <span>Empieza a lograr tus sueños <a routerLink="/register">aqui</a>  </span>
+        <div class="col-md-7" *ngIf="_userService.isAuthenticated()">
+            <img src="assets/img/dreams.png" class="img-fluid">
         </div>
+
     </div>
+
 </div>

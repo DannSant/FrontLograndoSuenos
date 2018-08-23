@@ -44,20 +44,28 @@
             </div>
         </div>
     </div>
-
-    <div class="card" *ngFor="let notification of notifications">
-        <div class="card-header">
-            {{notification.title}}
+    <div [ngStyle]="{'display':notifications.length<=0 ? 'none' : 'block' }">
+        <div class="card" *ngFor="let notification of notifications">
+            <div class="card-header">
+                {{notification.title}}
+            </div>
+            <div class="card-body">
+                <p *ngIf="notification.type=='T'" class="card-text"><span class="badge badge-secondary">Contenido:</span>{{notification.text | notificationContent:'T'}}</p>
+                <p *ngIf="notification.type=='F'" class="card-text"><span class="badge badge-secondary">Liga de archivo:</span>{{notification.text | notificationContent:'F'}}</p>
+                <p class="card-text"><span class="badge badge-secondary">Estatus:</span> {{notification.status | statusHandler:'activo'}}</p>
+                <p class="card-text"><span class="badge badge-secondary">Es broadcast:</span> {{notification.broadcast | statusHandler:'si'}}</p>
+                <a [routerLink]="['/notification',notification._id]" class="btn btn-primary">Modificar</a>
+                <button *ngIf="notification.status==true" (click)="deleteNotification(notification)" class="btn btn-danger">Desactivar</button>
+                <button *ngIf="notification.status==false" (click)="enableNotification(notification)" class="btn btn-warning">Habilitar</button>
+            </div>
         </div>
-        <div class="card-body">
-            <p class="card-text"><span class="badge badge-secondary">Contenido:</span>{{notification.text}}</p>
-            <p class="card-text"><span class="badge badge-secondary">Estatus:</span> {{notification.status | statusHandler:'activo'}}</p>
-            <p class="card-text"><span class="badge badge-secondary">Es broadcast:</span> {{notification.broadcast | statusHandler:'si'}}</p>
-            <a [routerLink]="['/notification',notification._id]" class="btn btn-primary">Modificar</a>
-            <button (click)="deleteNotification(notification)" class="btn btn-danger">Desactivar</button>
-        </div>
+        <app-pagination [pageSize]="20" (onPageChange)="setPageAndPopulate($event)"></app-pagination>
     </div>
-
-    <app-pagination [pageSize]="20" (onPageChange)="setPageAndPopulate($event)"></app-pagination>
-
+    <div class="row" *ngIf="notifications.length<=0">
+            <div class="col-md-12">
+                <div class="alert alert-warning" role="alert">
+                    No hay notificaciones de momento
+                </div>
+            </div>
+        </div>
 </div>

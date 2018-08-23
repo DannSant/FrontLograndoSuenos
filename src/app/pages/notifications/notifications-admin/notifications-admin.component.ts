@@ -50,9 +50,10 @@ export class NotificationsAdminComponent implements OnInit {
   }
 
   populateNotifications(){
-    this.buildFilterObject();   
+    this.buildFilterObject();
+    this._alert.showWaitWindow("Cargando","Estamos obteniendo las notificaciones de la base de datos, espere un momento")   
     this._notifications.getNotifications(this.filter,this.fromPage).subscribe((resp:any)=>{
-     
+      this._alert.closeWaitWindow();
       if(resp.ok){
         this.notifications=resp.data;
         this.pagination.createPaginationArray(resp.records);
@@ -100,8 +101,16 @@ export class NotificationsAdminComponent implements OnInit {
   deleteNotification(notification:Notification){
     this._notifications.deleteNotification(notification).subscribe((resp:any)=>{
       if(resp.ok){
-        this._alert.showAlert("Todo bien","La notificacion des deshabilitó con exito","success");
-        this.populateNotifications();
+        this._alert.showAlertWithCallback("Todo bien","La notificacion des deshabilitó con exito","success",()=>{this.populateNotifications();});
+
+        
+      }
+    })
+  }
+  enableNotification(notification:Notification){
+    this._notifications.enableNotification(notification).subscribe((resp:any)=>{
+      if(resp.ok){
+        this._alert.showAlertWithCallback("Todo bien","La notificacion des habilitó con exito","success",()=>{this.populateNotifications();});
       }
     })
   }
@@ -113,14 +122,14 @@ export class NotificationsAdminComponent implements OnInit {
         resp="Todas"
       } else if (this.status==2){
         resp="Activas"
-      } else if (this.status==2){
+      } else if (this.status==3){
         resp="Inactivas"
       }
     }else if(type=="to"){
       if(this.isBroadcast){
         resp="Todos";
       }else {
-        resp=this.user;
+        resp=(this.user)?this.user:"Usuarios especificos";
       }
     }
     

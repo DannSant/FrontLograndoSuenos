@@ -1,3 +1,31 @@
-<p>
-  notifications-feed works!
-</p>
+<div class="container main-container">
+  <h1>Mis notificaciones</h1>
+
+  <hr>
+  <div [ngStyle]="{'display':notifications.length<=0 ? 'none' : 'block' }">
+  <div class="card" *ngFor="let notification of notifications" >
+      <div class="card-header">
+          {{notification.title}}
+      </div>
+      <div class="card-body">
+          <h4> <p *ngIf="notification.type=='T'" class="card-text">
+            {{notification.text | notificationContent:'T'}}
+          </p></h4>
+          <p *ngIf="notification.type=='F'" class="card-text">
+            <a target=”_blank” [href]="notification.text | notificationContent:'F'">{{notification.text | notificationContent:'T'}}</a>
+          </p>          
+      </div>
+      
+  </div>
+  <app-pagination [pageSize]="20" (onPageChange)="setPageAndPopulate($event)"></app-pagination>
+</div> 
+ 
+  <div class="row" *ngIf="notifications.length<=0">
+      <div class="col-md-12">
+          <div class="alert alert-warning" role="alert">
+              No hay notificaciones de momento
+          </div>
+      </div>
+  </div>
+
+</div>

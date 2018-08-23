@@ -13,9 +13,9 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this._userService.token.length>0){
-      this._userService.validateSession().subscribe();
-    }
+    // if(this._userService.token.length>0){
+    //   this._userService.validateSession().subscribe();
+    // }
     
   }
 

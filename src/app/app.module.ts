@@ -14,6 +14,17 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BoucherUploadComponent } from './pages/boucher-upload/boucher-upload.component';
+import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
+import { NewUserComponent } from './pages/users/new-user/new-user.component';
+import { ViewUserComponent } from './pages/users/view-user/view-user.component';
+import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
+import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
+import { ProfileComponent } from './pages/users/profile/profile.component';
+import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
+import { NotificationComponent } from './pages/notifications/notification/notification.component';
+import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
+import { SearchSelectorComponent } from './components/search-selector/search-selector.component';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 //Rutas
 import {app_routing} from './app.routes';
@@ -29,32 +40,16 @@ import { SubirArchivoService } from './services/subir-archivo.service';
 import { LoginGuard } from './services/guards/login.guard';
 import { AdminGuard } from './services/guards/admin.guard';
 import { NotificationService } from './services/notification.service';
+import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 
 //Pipes
 import { ImagenPipe } from './pipes/imagen.pipe';
+import { NotificationContentPipe } from './pipes/notification-content.pipe';
+import { StatusHandlerPipe } from './pipes/status-handler.pipe';
 
 //Otros
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
-import { NewUserComponent } from './pages/users/new-user/new-user.component';
-import { ViewUserComponent } from './pages/users/view-user/view-user.component';
-import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
-import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
-import { ProfileComponent } from './pages/users/profile/profile.component';
-import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
-import { NotificationComponent } from './pages/notifications/notification/notification.component';
-import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
-import { SearchSelectorComponent } from './components/search-selector/search-selector.component';
-import { StatusHandlerPipe } from './pipes/status-handler.pipe';
-import { PaginationComponent } from './components/pagination/pagination.component';
-
-
-
-
-
-
-
 
 registerLocaleData(localeEs);
 
@@ -77,7 +72,8 @@ registerLocaleData(localeEs);
     NotificationsFeedComponent,
     SearchSelectorComponent,
     StatusHandlerPipe,
-    PaginationComponent
+    PaginationComponent,
+    NotificationContentPipe
   ],
   imports: [
     BrowserModule,
@@ -102,7 +98,8 @@ registerLocaleData(localeEs);
     SubirArchivoService,
     LoginGuard,
     AdminGuard,
-    NotificationService
+    NotificationService,
+    VerifyTokenGuard
   ],
   bootstrap: [AppComponent]
 })

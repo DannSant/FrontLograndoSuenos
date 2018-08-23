@@ -12,6 +12,8 @@ import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/
 import { ProfileComponent } from './pages/users/profile/profile.component';
 import { NotificationsAdminComponent } from './pages/notifications/notifications-admin/notifications-admin.component';
 import { NotificationComponent } from './pages/notifications/notification/notification.component';
+import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
+import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -21,37 +23,42 @@ const app_routes: Routes = [
   { 
     path: 'profile/:id', 
     component: ProfileComponent,
-    canActivate:[LoginGuard]
+    canActivate:[LoginGuard,VerifyTokenGuard]
   }, 
   { 
     path: 'downloadDB',
     component: DownloadDatabaseComponent ,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard,VerifyTokenGuard]
   },
   { 
     path: 'newAssociates',
     component: NewAssociatesComponent ,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard,VerifyTokenGuard]
   },
   { 
     path: 'newUser/:associate_id',
     component: NewUserComponent ,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard,VerifyTokenGuard]
   },
   { 
     path: 'viewUser/:id',
     component: ViewUserComponent ,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard,VerifyTokenGuard]
   },
   { 
     path: 'notificationsAdmin',
     component: NotificationsAdminComponent ,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard,VerifyTokenGuard]
   },
   { 
     path: 'notification/:id',
     component: NotificationComponent ,
-    canActivate: [AdminGuard]
+    canActivate: [AdminGuard,VerifyTokenGuard]
+  },
+  { 
+    path: 'notifications',
+    component: NotificationsFeedComponent ,
+    canActivate: [LoginGuard,VerifyTokenGuard]
   },
   { path: '**', pathMatch: 'full', redirectTo: 'home' }
 ];
