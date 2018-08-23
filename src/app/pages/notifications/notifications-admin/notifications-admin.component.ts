@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotificationService } from '../../../services/notification.service';
 import { AlertService } from '../../../services/alert.service';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
+import { PaginationComponent } from '../../../components/pagination/pagination.component';
 
 @Component({
   selector: 'app-notifications-admin',
   templateUrl: './notifications-admin.component.html',
-  styles: []
+  styles: [``]
 })
 export class NotificationsAdminComponent implements OnInit {
   notifications:Notification[] = [];
@@ -20,8 +21,8 @@ export class NotificationsAdminComponent implements OnInit {
   
 
   //paginacion
-  fromPag:number=0;
-
+  @ViewChild(PaginationComponent) pagination:PaginationComponent;
+  fromPage:number;
   constructor(
     public _notifications:NotificationService,
     public _alert:AlertService,
@@ -42,19 +43,28 @@ export class NotificationsAdminComponent implements OnInit {
   
 
   ngOnInit() {
+    this.status=1;
+    this.isBroadcast=true;
+    this.user=null;
     this.populateNotifications();
   }
 
   populateNotifications(){
     this.buildFilterObject();   
-    this._notifications.getNotifications(this.filter,this.fromPag).subscribe((resp:any)=>{
+    this._notifications.getNotifications(this.filter,this.fromPage).subscribe((resp:any)=>{
      
       if(resp.ok){
         this.notifications=resp.data;
+        this.pagination.createPaginationArray(resp.records);
       }else {
        this._alert.showAlert("Error","Hubo un problema al cargar la informacion","error");
       }
     });
+  }  
+
+  setPageAndPopulate(newPage:number){
+    this.fromPage=newPage;
+    this.populateNotifications();
   }
 
   buildFilterObject(){
@@ -98,7 +108,22 @@ export class NotificationsAdminComponent implements OnInit {
 
   getShowTags(type:string):string{
     let resp = "";
-
+    if(type=="status"){
+      if(this.status==1){
+        resp="Todas"
+      } else if (this.status==2){
+        resp="Activas"
+      } else if (this.status==2){
+        resp="Inactivas"
+      }
+    }else if(type=="to"){
+      if(this.isBroadcast){
+        resp="Todos";
+      }else {
+        resp=this.user;
+      }
+    }
+    
     return resp;
   }
 

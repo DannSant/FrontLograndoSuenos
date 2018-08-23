@@ -17,9 +17,9 @@
                           <option value="3">Inactivas</option>
                         </select>
                     </div>
-                  
+
                     <app-search-selector [elementsdata]="usersFilter" (selectedUser)="setSelectedUser($event)"></app-search-selector>
-                    
+
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" [(ngModel)]="isBroadcast">
                         <label class="form-check-label" for="defaultCheck1">
@@ -38,8 +38,8 @@
             <div class="card border-info mb-3">
                 <div class="card-body">
                     <h5 class="card-title">Mostrando</h5>
-                    <p class="card-text">Notificaciones activas</p>
-                    <p class="card-text">Para: Todos</p>
+                    <p class="card-text">Notificaciones {{getShowTags("status")}}</p>
+                    <p class="card-text">Para: {{getShowTags("to")}}</p>
                 </div>
             </div>
         </div>
@@ -57,4 +57,7 @@
             <button (click)="deleteNotification(notification)" class="btn btn-danger">Desactivar</button>
         </div>
     </div>
+
+    <app-pagination [pageSize]="20" (onPageChange)="setPageAndPopulate($event)"></app-pagination>
+
 </div>

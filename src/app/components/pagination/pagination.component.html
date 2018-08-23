@@ -1,0 +1,6 @@
+<div class="pagination">
+    <a (click)="sumPage(-1)">&laquo;</a>
+    <a name="page" [id]="'page' + page" (click)="changePage(page)" *ngFor="let page of pages">{{page + 1}}</a>
+
+    <a (click)="sumPage(1) ">&raquo;</a>
+</div>

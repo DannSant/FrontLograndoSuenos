@@ -47,6 +47,7 @@ import { NotificationComponent } from './pages/notifications/notification/notifi
 import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
 import { SearchSelectorComponent } from './components/search-selector/search-selector.component';
 import { StatusHandlerPipe } from './pipes/status-handler.pipe';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 
@@ -75,7 +76,8 @@ registerLocaleData(localeEs);
     NotificationComponent,
     NotificationsFeedComponent,
     SearchSelectorComponent,
-    StatusHandlerPipe
+    StatusHandlerPipe,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
