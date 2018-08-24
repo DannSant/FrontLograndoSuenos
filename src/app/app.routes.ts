@@ -14,10 +14,12 @@ import { NotificationsAdminComponent } from './pages/notifications/notifications
 import { NotificationComponent } from './pages/notifications/notification/notification.component';
 import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
 import { VerifyTokenGuard } from './services/guards/verify-token.guard';
+import { AboutComponent } from './pages/about/about.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
   { path: 'register', component: RegisterComponent }, 
+  { path: 'about', component: AboutComponent }, 
   { path: 'boucher/:id', component: BoucherUploadComponent }, 
   { path: 'welcomeAssociate/:id', component: WelcomeAssociateComponent },
   { 

@@ -36,6 +36,9 @@
             <li class="nav-item" routerLinkActive="active" *ngIf="!_userService.isAuthenticated()">
                 <a class="nav-link" [routerLink]="['/register']">Registrarse <span class="sr-only">(current)</span> </a>
             </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" [routerLink]="['/about']">Acerca de  </a>
+            </li>
 
             <li class="nav-item dropdown" *ngIf="_userService.isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

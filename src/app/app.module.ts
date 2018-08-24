@@ -25,6 +25,7 @@ import { NotificationComponent } from './pages/notifications/notification/notifi
 import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
 import { SearchSelectorComponent } from './components/search-selector/search-selector.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { AboutComponent } from './pages/about/about.component';
 
 //Rutas
 import {app_routing} from './app.routes';
@@ -51,6 +52,7 @@ import { StatusHandlerPipe } from './pipes/status-handler.pipe';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 
+
 registerLocaleData(localeEs);
 
 @NgModule({
@@ -73,7 +75,8 @@ registerLocaleData(localeEs);
     SearchSelectorComponent,
     StatusHandlerPipe,
     PaginationComponent,
-    NotificationContentPipe
+    NotificationContentPipe,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
