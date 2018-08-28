@@ -1,35 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertService } from '../../services/alert.service';
-import { BankService } from '../../services/bank.service';
-import { AssociateService } from '../../services/associate.service';
-import { Associate } from '../../models/associate.model';
-import { Bank } from '../../models/bank.model';
-import { NgForm } from '../../../../node_modules/@angular/forms';
-import { StatesService } from '../../services/states.service';
+import { Bank } from '../../../models/bank.model';
+import { Associate } from '../../../models/associate.model';
+import { State } from '../../../models/state.model';
+import { AlertService } from '../../../services/alert.service';
+import { BankService } from '../../../services/bank.service';
+import { AssociateService } from '../../../services/associate.service';
+import { StatesService } from '../../../services/states.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { State } from '../../models/state.model';
-
+import { UserService } from '../../../services/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styles: [`
-  .ng-invalid.ng-touched:not(form) {
-    border: 1px solid red;
-  }
-
-  .input-error {
-    color:red;
-  }`]
+  selector: 'app-associate-detail',
+  templateUrl: './associate-detail.component.html',
+  styles: []
 })
-export class RegisterComponent implements OnInit {
+export class AssociateDetailComponent implements OnInit {
 
   banks:Bank[] = [];
   selectedBank:Bank;
   states:State[] = [];
 
-  associate:Associate={};
+  associate:Associate={
+    bank:{},
+    state:{}
+  };
 
   errors:string="";
   phase:string="init";
@@ -42,14 +37,35 @@ export class RegisterComponent implements OnInit {
     public router:Router,
     public activatedRoute:ActivatedRoute,
     public _userService:UserService
-  ) { 
-    
+  ) { }
+
+  ngOnInit() {    
+    this.checkForUser();
   }
-  /*
-  */
 
+  
+  checkForUser(){
+    this.activatedRoute.params.subscribe((params:any)=>{
+      let id = params.id;
+      if(!id){
+        this._alert.showAlert("Error","No se ha recibido un id de afiliado, favor de ingresar correctamente desde la opcion Lista de afiliados","error");
+        this.router.navigate(["/associateList"]);
+        return;
+      }     
+      this._associates.getAssociate(id).subscribe((resp:any)=>{
+        this.populateCatalogs();
+       
+        if(resp.ok){
+          this.associate = resp.data;
+        }else {
+          this._alert.showAlert("Error","Error al recuperar datos del afiliado","error");
+          this.associate={};
+        }
+      })
+    });
+  }
 
-  ngOnInit() {
+  populateCatalogs(){
     this._banks.loadAllBanks().subscribe((resp:any)=>{
       
       if(resp.ok){
@@ -71,12 +87,10 @@ export class RegisterComponent implements OnInit {
       }
       
     });
-
-    this.associate.state={_id:"0"};
-    this.associate.bank = {_id:"0"};    
   }
 
-  register(f:NgForm){
+
+  updateAssociate(f:NgForm){
 
     if(this.associate.bank._id=="0"){
       this.errors="MISSING_BANK";
@@ -111,8 +125,7 @@ export class RegisterComponent implements OnInit {
     this._associates.createAssociate(this.associate).subscribe((resp:any)=>{
       //console.log(resp);
       if(resp.ok){
-        let id = resp.data._id;
-        this.router.navigate(['/boucher',id]);
+        this._alert.showAlert("Todo bien!", "Los datos se guardaron de manera correcta", "success");
       }else {
         this._alert.showAlert("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error");
       }

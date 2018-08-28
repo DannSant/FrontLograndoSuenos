@@ -15,6 +15,8 @@ import { NotificationComponent } from './pages/notifications/notification/notifi
 import { NotificationsFeedComponent } from './pages/notifications/notifications-feed/notifications-feed.component';
 import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 import { AboutComponent } from './pages/about/about.component';
+import { AssociatesListComponent } from './pages/associates/associates-list/associates-list.component';
+import { AssociateDetailComponent } from './pages/associates/associates-list/associate-detail.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -35,6 +37,16 @@ const app_routes: Routes = [
   { 
     path: 'newAssociates',
     component: NewAssociatesComponent ,
+    canActivate: [AdminGuard,VerifyTokenGuard]
+  },
+  { 
+    path: 'associateList',
+    component: AssociatesListComponent ,
+    canActivate: [AdminGuard,VerifyTokenGuard]
+  },
+  { 
+    path: 'associateDetail/:id',
+    component: AssociateDetailComponent ,
     canActivate: [AdminGuard,VerifyTokenGuard]
   },
   { 

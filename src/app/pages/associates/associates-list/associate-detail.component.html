@@ -1,0 +1,214 @@
+<div class="container main-container">
+
+    <div class="row">
+        <div class="col-md-7">
+            <h2>Registrate</h2>
+            <form #f="ngForm" (ngSubmit)="updateAssociate(f)" ngNativeValidation>
+
+                <!-- NOMBRE DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': name.errors?.required && name.touched}">
+                    <label for="name">Nombre</label>
+                    <input type="text" name="name" [(ngModel)]="associate.name" class="form-control" placeholder="Ingresar nombre" #name="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- EMAIL PERSONAL DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': personalEmail.errors?.required && personalEmail.touched}" matTooltipClass="medium-tooltip">
+
+                    <label for="personalEmail">Correo personal</label>
+                    <input type="email" name="personalEmail" [(ngModel)]="associate.personalEmail" class="form-control" placeholder="Ingresar email personal" #personalEmail="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="personalEmail.errors?.required && personalEmail.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- EMAIL DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': email.errors?.required && email.touched}" matTooltipClass="medium-tooltip">
+
+                    <label for="email">Correo</label>
+                    <input type="email" name="email" [(ngModel)]="associate.email" class="form-control" placeholder="Ingresar email" #email="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="email.errors?.required && email.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- MOVIL DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': cellphone.errors && cellphone.touched}">
+                    <label for="cellphone">Celular</label>
+                    <input type="text" name="cellphone" [(ngModel)]="associate.cellphone" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar Telefono" #cellphone="ngModel" required maxlength=10>
+                    <div class="alert alert-danger" *ngIf="cellphone.errors?.required && cellphone.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="cellphone.errors?.pattern && cellphone.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!-- <pre>{{cellphone.errors | json}}</pre> -->
+
+                <!-- BANCO DEL ASOCIADO -->
+                <div class="input-group mb-3" [ngClass]="{'has-danger': errors=='MISSING_BANK' && bank.touched}">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Banco</label>
+                    </div>
+                    <select name="bank" [(ngModel)]="associate.bank._id" (ngModelChange)="errors=''" class="custom-select" id="inputGroupSelect01" #bank="ngModel">
+                    <option selected value="0">Seleccione...</option>
+                    <option *ngFor="let bank of banks" [value]="bank._id">{{bank.name}}</option>                    
+                  </select>
+
+                </div>
+                <div class="alert alert-danger" *ngIf=" errors=='MISSING_BANK'">
+                    <small>Seleccione un banco valido</small>
+                </div>
+
+                <!--CUENTA DE BANCO -->
+                <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': bank.errors && bank.touched}">
+                    <label for="account">Cuenta de banco</label>
+                    <input type="text" name="account" [(ngModel)]="associate.account" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar cuenta de banco" #account="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="account.errors?.required && account.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="account.errors?.pattern && account.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!--CUENTA CLABE -->
+                <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': clabe.errors && clabe.touched}">
+                    <label for="clabe">Cuenta de Clabe</label>
+                    <input type="text" name="clabe" [(ngModel)]="associate.clabe" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar cuenta de clabe" #clabe="ngModel" required maxlength=18>
+                    <div class="alert alert-danger" *ngIf="clabe.errors?.required && clabe.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="clabe.errors?.pattern && clabe.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!--NUMERO DE TARJETA -->
+                <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': card.errors && card.touched}">
+                    <label for="card">Numero de tarjeta</label>
+                    <input type="text" name="card" [(ngModel)]="associate.card" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar numero de tarjeta" #card="ngModel" required maxlength=16>
+                    <div class="alert alert-danger" *ngIf="card.errors?.required && card.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="card.errors?.pattern && card.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!--CURP DEL AFILIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': curp.errors && curp.touched}">
+                    <label for="curp">CURP</label>
+                    <input type="text" name="curp" [(ngModel)]="associate.curp" class="form-control" placeholder="Ingresar curp" #curp="ngModel" required maxlength=18>
+                    <div class="alert alert-danger" *ngIf="curp.errors?.required && curp.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!--CURP DEL AFILIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': rfc.errors && rfc.touched}">
+                    <label for="rfc">RFC</label>
+                    <input type="text" name="rfc" [(ngModel)]="associate.rfc" class="form-control" placeholder="Ingresar rfc" #rfc="ngModel" required maxlength=13>
+                    <div class="alert alert-danger" *ngIf="rfc.errors?.required && rfc.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!--ESTADO DEL AFILIADO -->
+                <div class="input-group mb-3" [ngClass]="{'has-danger': errors=='MISSING_BANK' && state.touched}">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="state">Estado</label>
+                    </div>
+                    <select name="state" [(ngModel)]="associate.state._id" (ngModelChange)="errors=''" class="custom-select" id="selectedState" #state="ngModel">
+                    <option selected value="0">Seleccione...</option>
+                    <option *ngFor="let state of states" [value]="state._id">{{state.name}}</option>                    
+                  </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="errors=='MISSING_STATE'">
+                    <small>Seleccione un estado valido</small>
+                </div>
+
+                <!--DIRECCION DEL AFILIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': address.errors && address.touched}">
+                    <label for="address">Direccion</label>
+                    <textarea name="address" [(ngModel)]="associate.address" class="form-control" id="address" rows="3" #address="ngModel" required></textarea>
+                    <div class="alert alert-danger" *ngIf="address.errors?.required && address.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+
+                <!--FECHA DE NACIMIENTO DEL AFILIADO -->
+                <div [ngClass]="{'has-danger': birthDate.errors && birthDate.touched}">
+                    <mat-form-field color="accent">
+                        <mat-label for="birthDate">
+                            Fecha de nacimiento
+                        </mat-label>
+                        <input matInput [matDatepicker]="myDatepicker" name="birthDate" [(ngModel)]="associate.birthDate" #birthDate="ngModel" required>
+                        <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <div class="alert alert-danger" *ngIf="birthDate.errors?.required && birthDate.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf=" errors=='UNDER_AGED'">
+                        <small>El afiliado debe ser mayor de edad (18 años)</small>
+                    </div>
+                </div>
+
+                <hr>
+
+                <!--MONTO DEL PAGO -->
+                <div class="form-group" [ngClass]="{'has-danger': payAmmount.errors && payAmmount.touched}">
+                    <label for="payAmmount">Monto del Pago</label>
+                    <input type="number" name="payAmmount" [(ngModel)]="associate.payAmmount" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar monto de pago" #payAmmount="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="payAmmount.errors?.required && payAmmount.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="payAmmount.errors?.pattern && payAmmount.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!--FOLIO DEL PAGO -->
+                <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': paymentNumber.errors && paymentNumber.touched}">
+                    <label for="paymentNumber">Folio del pago</label>
+                    <input type="text" name="paymentNumber" [(ngModel)]="associate.paymentNumber" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar folio del pago" #paymentNumber="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="paymentNumber.errors?.required && paymentNumber.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="paymentNumber.errors?.pattern && paymentNumber.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!--FECHA DE PAGO -->
+                <div [ngClass]="{'has-danger': paymentDate.errors && paymentDate.touched}">
+                    <mat-form-field color="accent">
+                        <mat-label for="paymentDate">
+                            Fecha de pago
+                        </mat-label>
+                        <input matInput [matDatepicker]="paymentDatepicker" name="paymentDate" [(ngModel)]="associate.paymentDate" #paymentDate="ngModel">
+                        <mat-datepicker-toggle [for]="paymentDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #paymentDatepicker></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <div class="alert alert-danger" *ngIf="paymentDate.errors?.required && paymentDate.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-danger" routerLink="/associateList">Cancelar</button>
+            </form>
+        </div>
+
+    </div>
+</div>

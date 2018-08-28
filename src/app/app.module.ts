@@ -51,6 +51,8 @@ import { StatusHandlerPipe } from './pipes/status-handler.pipe';
 //Otros
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+import { AssociatesListComponent } from './pages/associates/associates-list/associates-list.component';
+import { AssociateDetailComponent } from './pages/associates/associates-list/associate-detail.component';
 
 
 registerLocaleData(localeEs);
@@ -76,7 +78,9 @@ registerLocaleData(localeEs);
     StatusHandlerPipe,
     PaginationComponent,
     NotificationContentPipe,
-    AboutComponent
+    AboutComponent,
+    AssociatesListComponent,
+    AssociateDetailComponent
   ],
   imports: [
     BrowserModule,

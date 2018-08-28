@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { UserService } from '../user.service';
+import { AlertService } from '../alert.service';
 
 @Injectable()
 export class VerifyTokenGuard implements CanActivate {
   constructor(
     public _usuarioService:UserService,
+    public _alert:AlertService,
     public router:Router
   ){}
 
@@ -19,7 +21,8 @@ export class VerifyTokenGuard implements CanActivate {
     let expirado = this.expirado(payload.exp);
 
     if(expirado){
-      this.router.navigate(['/login'])
+     this._alert.showAlert("Error","Tu sesión ha expirado, vuelve a iniciar sesión","error");
+     this._usuarioService.logout();
       return true;
     }
 

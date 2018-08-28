@@ -146,7 +146,7 @@ export class UserService {
     localStorage.removeItem("id");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
-    this.router.navigate(['/login']);
+    this.router.navigate(['/home']);
   }
 
   crearUsuario(user:User){

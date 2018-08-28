@@ -1,0 +1,38 @@
+<div class="big-container">
+    <div class="row" *ngIf="associates.length<=0">
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+                No hay afiliados nuevos de momento
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="associates.length>0">
+        <div class="col-md-8">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Pagado</th>
+                        <th scope="col">Cuenta</th>
+                        <th scope="col">Controles</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let associate of associates">
+                        <th scope="row">{{associate.name}}</th>
+                        <td>{{associate.cellphone}}</td>
+                        <td>{{associate.hasPayment}}</td>
+                        <td>{{associate.account}}</td>
+                        <td>
+                            <button class="btn btn-danger" (click)="deleteAssociate(associate)"><i class="fas fa-eye"></i>Eliminar</button>
+                            <button class="btn btn-primary" [routerLink]="['/associateDetail',associate._id]"> <i class="fas fa-cogs"></i>Modificar</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

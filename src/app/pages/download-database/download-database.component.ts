@@ -36,7 +36,7 @@ export class DownloadDatabaseComponent implements OnInit {
       'Base',
       {
         showLabels:true,
-        headers: ['NUM','NOMBRE','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO']
+        headers: ['NUM','NOMBRE','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA','FECHA DE NACIMIENTO',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO']
       }
       
     );
@@ -53,6 +53,7 @@ export class DownloadDatabaseComponent implements OnInit {
         cuenta:associate.account.toString(),
         clabe:associate.clabe.toString(),
         tarjeta:associate.card.toString(),
+        birthDate: associate.birthDate,
         curp:associate.curp,
         rfc:associate.rfc,
         movil:associate.cellphone.toString(),
