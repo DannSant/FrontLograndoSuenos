@@ -14,6 +14,15 @@
                     </div>
                 </div>
 
+                <!-- APELLIDO DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': lastname.errors?.required && lastname.touched}">
+                    <label for="lastname">Apellidos</label>
+                    <input type="text" name="lastname" [(ngModel)]="associate.lastname" class="form-control" placeholder="Ingresar apellidos" #lastname="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="lastname.errors?.required && lastname.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
                 <!-- EMAIL DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': personalEmail.errors?.required && personalEmail.touched}" mat-raised-button matTooltip="En este correo te proporcionaremos tus datos de usuario, por lo que debe de ser un correo válido" matTooltipPosition="after"
                     matTooltipClass="medium-tooltip">
@@ -57,7 +66,7 @@
                 <!--CUENTA DE BANCO -->
                 <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': bank.errors && bank.touched}">
                     <label for="account">Cuenta de banco</label>
-                    <input type="text" name="account" [(ngModel)]="associate.account" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar cuenta de banco" #account="ngModel" required>
+                    <input type="text" name="account" [(ngModel)]="associate.account" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar cuenta de banco" #account="ngModel">
                     <div class="alert alert-danger" *ngIf="account.errors?.required && account.touched">
                         <small>Este campo es requerido</small>
                     </div>
@@ -69,7 +78,7 @@
                 <!--CUENTA CLABE -->
                 <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': clabe.errors && clabe.touched}">
                     <label for="clabe">Cuenta de Clabe</label>
-                    <input type="text" name="clabe" [(ngModel)]="associate.clabe" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar cuenta de clabe" #clabe="ngModel" required maxlength=18>
+                    <input type="text" name="clabe" [(ngModel)]="associate.clabe" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar cuenta de clabe" #clabe="ngModel" maxlength=18>
                     <div class="alert alert-danger" *ngIf="clabe.errors?.required && clabe.touched">
                         <small>Este campo es requerido</small>
                     </div>
@@ -81,7 +90,7 @@
                 <!--NUMERO DE TARJETA -->
                 <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': card.errors && card.touched}">
                     <label for="card">Numero de tarjeta</label>
-                    <input type="text" name="card" [(ngModel)]="associate.card" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar numero de tarjeta" #card="ngModel" required maxlength=16>
+                    <input type="text" name="card" [(ngModel)]="associate.card" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar numero de tarjeta" #card="ngModel" maxlength=16>
                     <div class="alert alert-danger" *ngIf="card.errors?.required && card.touched">
                         <small>Este campo es requerido</small>
                     </div>
@@ -95,13 +104,13 @@
                 <!--CURP DEL AFILIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': curp.errors && curp.touched}">
                     <label for="curp">CURP</label>
-                    <input type="text" name="curp" [(ngModel)]="associate.curp" class="form-control" placeholder="Ingresar curp" #curp="ngModel" required maxlength=18>
+                    <input type="text" name="curp" [(ngModel)]="associate.curp" class="form-control" placeholder="Ingresar curp" #curp="ngModel" maxlength=18>
                     <div class="alert alert-danger" *ngIf="curp.errors?.required && curp.touched">
                         <small>Este campo es requerido</small>
                     </div>
                 </div>
 
-                <!--CURP DEL AFILIADO -->
+                <!--RFC DEL AFILIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': rfc.errors && rfc.touched}">
                     <label for="rfc">RFC</label>
                     <input type="text" name="rfc" [(ngModel)]="associate.rfc" class="form-control" placeholder="Ingresar rfc" #rfc="ngModel" required maxlength=13>
@@ -127,7 +136,7 @@
                 <!--DIRECCION DEL AFILIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': address.errors && address.touched}">
                     <label for="address">Direccion</label>
-                    <textarea name="address" [(ngModel)]="associate.address" class="form-control" id="address" rows="3" #address="ngModel" required></textarea>
+                    <textarea name="address" [(ngModel)]="associate.address" class="form-control" id="address" rows="3" #address="ngModel"></textarea>
                     <div class="alert alert-danger" *ngIf="address.errors?.required && address.touched">
                         <small>Este campo es requerido</small>
                     </div>

@@ -1,9 +1,11 @@
 import { Bank } from './bank.model';
 import { State } from './state.model';
+import { User } from './user.model';
 export class Associate {
     constructor(
         public id?:number,
         public name?:string,
+        public lastname?:string,
         public email?:string, 
         public personalEmail?:string, 
         public cellphone?:string,
@@ -22,6 +24,8 @@ export class Associate {
         public paymentBaucher?:string,
         public state?: State, 
         public creationDate?:Date,
+        public user?:User,
+        public firstTime?:boolean,
         public _id?:string
     ){}
 }

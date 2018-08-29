@@ -12,7 +12,7 @@ export class UserService {
 
   token:string="";
   loggedUser:User;
-  email:string
+  username:string
 
   //Constantes
   USER_ROLES = ["USER_ROLE","ADMIN_ROLE"];
@@ -100,8 +100,8 @@ export class UserService {
       this.loggedUser=null;
     }
 
-    if(localStorage.getItem("email")){
-      this.email = localStorage.getItem("email");
+    if(localStorage.getItem("username")){
+      this.username = localStorage.getItem("username");
     }
     
   }
@@ -114,13 +114,13 @@ export class UserService {
    this.token=token;
   }
 
-  login(email:string,password:string,remember:boolean){
+  login(username:string,password:string,remember:boolean){
     let url = SERVICE_URL + "/login";
     if(remember){
-      localStorage.setItem("email",email);
-      this.email=email;
+      localStorage.setItem("username",username);
+      this.username=username;
     }
-    return this.http.post(url,{email,password}).map((resp:any)=>{
+    return this.http.post(url,{username,password}).map((resp:any)=>{
      
       if(resp.ok){
         this.guardarStorage(resp.data._id,resp.token,resp.data);

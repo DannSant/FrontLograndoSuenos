@@ -6,7 +6,7 @@ export class User {
         public role?:string,
         public password?:string,
         public username?:string,
-        public _id?:string,
-        public associate?:Associate
+        public _id?:string
+       
     ){}
 }

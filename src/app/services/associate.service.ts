@@ -15,6 +15,25 @@ export class AssociateService {
     public _userService:UserService
   ) { }
 
+  createFirstAssociate(associate:Associate){
+    let url = SERVICE_URL + "/associate/register";
+    return this.http.post(url,associate).catch((e)=>{        
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }  
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      if(e.status==500){
+        this._alert.showAlert("Error","Ha ocurrido un error al crear el asociado "+associate.name.toUpperCase()+" Posiblemente falte algun dato que captura, si no funciona intente comunicarse con el administrador","error");
+      }else {
+        this._alert.showAlert("Error al registrar afiliado","Ha ocurrido al crear usuario, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      }
+    
+      return Observable.throw(e);
+    });
+  }
+
   createAssociate(associate:Associate){
     let url = SERVICE_URL + "/associate";
     return this.http.post(url,associate).catch((e)=>{        

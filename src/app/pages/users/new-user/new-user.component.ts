@@ -15,7 +15,7 @@ import { AssociateService } from '../../../services/associate.service';
 export class NewUserComponent implements OnInit {
 
   user:User = {};
-
+  associate:Associate={};
 
   constructor(
     public _userService:UserService,
@@ -29,9 +29,9 @@ export class NewUserComponent implements OnInit {
       if(associateId){
         this._associates.getAssociate(associateId).subscribe((resp:any)=>{
           if(resp.ok){
-            this.user.associate=resp.data;
+            this.associate=resp.data;
             this.user.name=resp.data.name;
-            this.user.username=resp.data.id;
+            this.user.username=resp.data.user.username;
             this.user.password="lograndosuenos7";           
           }
         })
@@ -53,7 +53,7 @@ export class NewUserComponent implements OnInit {
       this._alert.closeWaitWindow();
       if (resp.ok){
         //Enviar email
-        this._userService.sendWelcomeMail(this.user,this.user.associate.personalEmail).subscribe();
+        this._userService.sendWelcomeMail(this.user,this.associate.personalEmail).subscribe();
         //redireccionar a pantalla con el link
         let id = resp.data._id;
         this.router.navigate(['/viewUser',id]);

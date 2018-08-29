@@ -9,7 +9,7 @@ import { NgForm } from '../../../../node_modules/@angular/forms';
   styles: []
 })
 export class HomeComponent implements OnInit {
-  email:string;
+  username:string;
   remember:boolean;
   constructor(
     public _userService:UserService,
@@ -17,8 +17,8 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.email=this._userService.email;
-    if(this.email){
+    this.username=this._userService.username;
+    if(this.username){
       this.remember=true;
     }
   }
@@ -30,11 +30,11 @@ export class HomeComponent implements OnInit {
       return;
     }
 
-    let email = f.value.email;
+    let username = f.value.username;
     let password = f.value.password;
     let remember = f.value.remember;
 
-    this._userService.login(email,password,remember).subscribe((resp)=>{
+    this._userService.login(username,password,remember).subscribe((resp)=>{
       
       if(resp.ok){
         //this.router.navigate(['/services']);

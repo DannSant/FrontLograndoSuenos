@@ -78,15 +78,15 @@ export class RegisterComponent implements OnInit {
 
   register(f:NgForm){
 
-    if(this.associate.bank._id=="0"){
-      this.errors="MISSING_BANK";
-      return;
-    }
+    // if(this.associate.bank._id=="0"){
+    //   this.errors="MISSING_BANK";
+    //   return;
+    // }
 
-    if(this.associate.state._id=="0"){
-      this.errors="MISSING_STATE";
-      return;
-    }
+    // if(this.associate.state._id=="0"){
+    //   this.errors="MISSING_STATE";
+    //   return;
+    // }
 
     if(this.getAge(this.associate.birthDate)<18){
       this.errors="UNDER_AGED";
@@ -108,10 +108,10 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this._associates.createAssociate(this.associate).subscribe((resp:any)=>{
+    this._associates.createFirstAssociate(this.associate).subscribe((resp:any)=>{
       //console.log(resp);
       if(resp.ok){
-        let id = resp.data._id;
+        let id = resp.data.associate._id;
         this.router.navigate(['/boucher',id]);
       }else {
         this._alert.showAlert("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error");
@@ -120,6 +120,9 @@ export class RegisterComponent implements OnInit {
   }
 
   validateCurp(curp) {
+    if(!curp || curp==''){
+      return true;
+    }
     var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
         validado = curp.match(re);
 	
