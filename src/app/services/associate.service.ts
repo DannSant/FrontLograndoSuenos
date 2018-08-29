@@ -16,7 +16,7 @@ export class AssociateService {
   ) { }
 
   createFirstAssociate(associate:Associate){
-    let url = SERVICE_URL + "/associate/register";
+    let url = SERVICE_URL + "/register";
     return this.http.post(url,associate).catch((e)=>{        
       if (!e.error.error){
         console.log(e); 
