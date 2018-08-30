@@ -1,12 +1,12 @@
 <div class="big-container">
-    <div class="row" *ngIf="associates.length<=0">
+    <div class="row" *ngIf="positions.length<=0">
         <div class="col-md-12">
             <div class="alert alert-warning" role="alert">
                 No hay afiliados nuevos de momento
             </div>
         </div>
     </div>
-    <div class="row" *ngIf="associates.length>0">
+    <div class="row" *ngIf="positions.length>0">
         <div class="col-md-8">
             <table class="table table-hover">
                 <thead>
@@ -18,64 +18,69 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let associate of associates">
-                        <th scope="row">{{associate.name}}</th>
-                        <td>{{associate.personalEmail}}</td>
-                        <td>{{associate.cellphone}}</td>
+                    <tr *ngFor="let position of positions">
+                        <th scope="row">{{position.associate.user.name}}</th>
+                        <td>{{position.associate.personalEmail}}</td>
+                        <td>{{position.associate.cellphone}}</td>
                         <td>
-                            <button class="btn btn-info" (click)="selectedAssociate=associate"><i class="fas fa-eye"></i></button>
-                            <button class="btn btn-primary" [routerLink]="['/newUser',associate._id]"> <i class="far fa-envelope"></i></button>
+                            <button class="btn btn-info" (click)="selectedPosition=position" mat-raised-button matTooltip="Ver datos de esta posición del afiliado" matTooltipPosition="after">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-primary" [routerLink]="['/addEmail',position._id]" mat-raised-button matTooltip="Agregar correo a esta posición" matTooltipPosition="after"> 
+                                <i class="far fa-envelope"></i>
+                            </button>
                         </td>
                     </tr>
 
                 </tbody>
             </table>
         </div>
-        <div class="col-md-4" *ngIf="selectedAssociate">
+        <div class="col-md-4" *ngIf="selectedPosition">
             <div class="card">
                 <div class="card-header">
-                    {{selectedAssociate.name}}
+                    {{selectedPosition.associate.user.name}}
+                    {{selectedPosition.associate.user.lastname}}
                 </div>
                 <div class="card-body">
                     <table>
                         <tr>
                             <td>Cuenta:</td>
-                            <td> {{selectedAssociate.account}}</td>
+                            <td> {{selectedPosition.associate.account}}</td>
                         </tr>
                         <tr>
                             <td>Clabe:</td>
-                            <td> {{selectedAssociate.clabe}}</td>
+                            <td> {{selectedPosition.associate.clabe}}</td>
                         </tr>
                         <tr>
                             <td>Numero de tarjeta:</td>
-                            <td> {{selectedAssociate.card}}</td>
+                            <td> {{selectedPosition.associate.card}}</td>
                         </tr>
                         <tr>
                             <td>CURP:</td>
-                            <td> {{selectedAssociate.curp}}</td>
+                            <td> {{selectedPosition.associate.curp}}</td>
                         </tr>
                         <tr>
                             <td>RFC:</td>
-                            <td> {{selectedAssociate.rfc}}</td>
+                            <td> {{selectedPosition.associate.rfc}}</td>
                         </tr>
                         <tr>
                             <td>Direccion:</td>
-                            <td> {{selectedAssociate.address}}</td>
+                            <td> {{selectedPosition.associate.address}}</td>
                         </tr>
                         <tr>
                             <td>Fecha de nacimiento:</td>
-                            <td> {{selectedAssociate.birthDate}}</td>
+                            <td> {{selectedPosition.associate.birthDate}}</td>
                         </tr>
                         <tr>
                             <td>Fecha de registro:</td>
-                            <td> {{selectedAssociate.creationDate}}</td>
+                            <td> {{selectedPosition.associate.creationDate}}</td>
                         </tr>
                         <tr>
                             <td>Monto de pago:</td>
-                            <td> ${{selectedAssociate.payAmmount}}</td>
+                            <td> ${{selectedPosition.payAmmount}}</td>
                         </tr>
                         <tr>
-                            <td colspan="2"><img [src]="selectedAssociate.paymentBaucher | imagen" class="w350"></td>
+                            <td colspan="2"><img [src]="selectedPosition.paymentBaucher | imagen" class="w350"></td>
                         </tr>
                     </table>
                 </div>

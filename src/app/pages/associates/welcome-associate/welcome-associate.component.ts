@@ -3,6 +3,8 @@ import { Associate } from '../../../models/associate.model';
 import { AssociateService } from '../../../services/associate.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertService } from '../../../services/alert.service';
+import { PositionService } from '../../../services/position.service';
+import { Position } from '../../../models/position.model';
 
 @Component({
   selector: 'app-welcome-associate',
@@ -11,18 +13,19 @@ import { AlertService } from '../../../services/alert.service';
 })
 export class WelcomeAssociateComponent implements OnInit {
 
-  associate:Associate={};
+  position:Position={};
 
   constructor(
-    public _associates:AssociateService,
+    public _positions:PositionService,
     public _alert:AlertService,
     public activatedRoute:ActivatedRoute
   ) { 
     this.activatedRoute.params.subscribe((params:any)=>{
       let id=params.id;
-      this._associates.getAssociate(id).subscribe((resp:any)=>{
+      this._positions.getPosition(id).subscribe((resp:any)=>{
+        console.log(resp);
         if(resp.ok){
-          this.associate=resp.data;
+          this.position=resp.data;
         }
       });
     })

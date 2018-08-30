@@ -115,7 +115,7 @@ export class RegisterComponent implements OnInit {
     this._associates.registerAssociate(this.associate,this.user,this.position).subscribe((resp:any)=>{
       //console.log(resp);
       if(resp.ok){
-        let id = resp.data.associate._id;
+        let id = resp.data.position._id;
         this.router.navigate(['/boucher',id]);
       }else {
         this._alert.showAlert("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error");

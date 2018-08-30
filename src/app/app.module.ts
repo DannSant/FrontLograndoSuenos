@@ -15,7 +15,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BoucherUploadComponent } from './pages/boucher-upload/boucher-upload.component';
 import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
-import { NewUserComponent } from './pages/users/new-user/new-user.component';
+import { AddEmailComponent } from './pages/users/add-email/add-emial.component';
 import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
@@ -26,6 +26,9 @@ import { NotificationsFeedComponent } from './pages/notifications/notifications-
 import { SearchSelectorComponent } from './components/search-selector/search-selector.component';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { AboutComponent } from './pages/about/about.component';
+import { AssociatesListComponent } from './pages/associates/associates-list/associates-list.component';
+import { AssociateDetailComponent } from './pages/associates/associates-list/associate-detail.component';
+
 
 //Rutas
 import {app_routing} from './app.routes';
@@ -42,6 +45,7 @@ import { LoginGuard } from './services/guards/login.guard';
 import { AdminGuard } from './services/guards/admin.guard';
 import { NotificationService } from './services/notification.service';
 import { VerifyTokenGuard } from './services/guards/verify-token.guard';
+import { PositionService } from './services/position.service';
 
 //Pipes
 import { ImagenPipe } from './pipes/imagen.pipe';
@@ -51,8 +55,6 @@ import { StatusHandlerPipe } from './pipes/status-handler.pipe';
 //Otros
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
-import { AssociatesListComponent } from './pages/associates/associates-list/associates-list.component';
-import { AssociateDetailComponent } from './pages/associates/associates-list/associate-detail.component';
 
 
 registerLocaleData(localeEs);
@@ -66,7 +68,7 @@ registerLocaleData(localeEs);
     BoucherUploadComponent,
     ImagenPipe,
     DownloadDatabaseComponent,
-    NewUserComponent,
+    AddEmailComponent,
     ViewUserComponent,
     NewAssociatesComponent,
     WelcomeAssociateComponent,
@@ -106,7 +108,8 @@ registerLocaleData(localeEs);
     LoginGuard,
     AdminGuard,
     NotificationService,
-    VerifyTokenGuard
+    VerifyTokenGuard,
+    PositionService
   ],
   bootstrap: [AppComponent]
 })

@@ -8,6 +8,7 @@ export class Position {
     public paymentNumber?:string,
     public paymentBaucher?:string,
     public email?:string,
-    public associate?:Associate
+    public associate?:Associate,
+    public _id?:string
   ){}
 }

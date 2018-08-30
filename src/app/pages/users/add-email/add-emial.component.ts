@@ -6,33 +6,39 @@ import { AlertService } from '../../../services/alert.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Associate } from '../../../models/associate.model';
 import { AssociateService } from '../../../services/associate.service';
+import { Position } from '../../../models/position.model';
+import { PositionService } from '../../../services/position.service';
 
 @Component({
-  selector: 'app-new-user',
-  templateUrl: './new-user.component.html',
+  selector: 'app-add-email',
+  templateUrl: './add-email.component.html',
   styles: []
 })
-export class NewUserComponent implements OnInit {
+export class AddEmailComponent implements OnInit {
 
   user:User = {};
-  associate:Associate={};
+  position:Position={
+    associate:{
+      user:{}
+    }
+  };
 
   constructor(
     public _userService:UserService,
     public _alert:AlertService,
     public router:Router,
     public activatedRoute:ActivatedRoute,
-    public _associates:AssociateService
+    public _positions:PositionService
   ) {
     this.activatedRoute.params.subscribe((params:any)=>{
-      let associateId = params.associate_id;
-      if(associateId){
-        this._associates.getAssociate(associateId).subscribe((resp:any)=>{
+      let posId = params.associate_id;
+      if(posId){
+        this._positions.getPosition(posId).subscribe((resp:any)=>{
           if(resp.ok){
-            this.associate=resp.data;
-            this.user.name=resp.data.name;
-            this.user.username=resp.data.user.username;
-            this.user.password="lograndosuenos7";           
+            this.position=resp.data;
+            // this.user.name=this.position.associate.user.name;
+            // this.user.username=resp.data.user.username;
+            this.position.associate.user.password="lograndosuenos7";           
           }
         })
       }
@@ -49,14 +55,14 @@ export class NewUserComponent implements OnInit {
       return;
     }
     this._alert.showWaitWindow("Cargando","Estamos procesando la informacion, por favor espere");
-    this._userService.crearUsuario(this.user).subscribe((resp:any)=>{
+    this._positions.updateEmailInPosition(this.position).subscribe((resp:any)=>{
       this._alert.closeWaitWindow();
       if (resp.ok){
         //Enviar email
-        this._userService.sendWelcomeMail(this.user,this.associate.personalEmail).subscribe();
+        //this._userService.sendWelcomeMail(this.user,this.position.associate.personalEmail,this.position.email).subscribe();
         //redireccionar a pantalla con el link
         let id = resp.data._id;
-        this.router.navigate(['/viewUser',id]);
+        //this.router.navigate(['/viewUser',id]);
       }else {
         console.log(resp);
         this._alert.showAlert("Error","Ocurrio un error al dar de alta el usuario","error")

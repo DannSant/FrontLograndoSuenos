@@ -211,11 +211,11 @@ export class UserService {
     });
   }
 
-  sendWelcomeMail(user:User, personalEmail:string){
+  sendWelcomeMail(user:User, personalEmail:string,email:String){
     let url = SERVICE_URL + "/email/welcome";
     let headers = new HttpHeaders({token:this.token});
     let body = {
-      userEmail:user.username,
+      userEmail:email,
       personalEmail:personalEmail,
       userName:user.name,
       userUserName:user.username,

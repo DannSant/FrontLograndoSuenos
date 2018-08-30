@@ -6,6 +6,8 @@ import { NgForm } from '../../../../node_modules/@angular/forms';
 import { AlertService } from '../../services/alert.service';
 import { SubirArchivoService } from '../../services/subir-archivo.service';
 import { Router } from '@angular/router';
+import { Position } from '../../models/position.model';
+import { PositionService } from '../../services/position.service';
 
 @Component({
   selector: 'app-boucher-upload',
@@ -13,22 +15,22 @@ import { Router } from '@angular/router';
   styles: []
 })
 export class BoucherUploadComponent implements OnInit {
-  associate:Associate={};
+  position:Position={};
  
   oculto:string = '';
   imagenSubir:File;
   imagenTemp:string;
   constructor(
     public activateRoute:ActivatedRoute,
-    public _associates:AssociateService,
+    public _positions:PositionService,
     public _alert:AlertService,
     public _subirArchivoService:SubirArchivoService,
     public router:Router
   ) {    
     activateRoute.params.subscribe((params)=>{
-      this._associates.getAssociate(params.id).subscribe((resp:any)=>{
+      this._positions.getPosition(params.id).subscribe((resp:any)=>{       
         if(resp.ok){
-          this.associate=resp.data;
+          this.position=resp.data;
          
         }
       })
@@ -42,9 +44,9 @@ export class BoucherUploadComponent implements OnInit {
 
   subirImagen(){
     this._alert.showWaitWindow("Cargando","Espera un momento, estamos subiendo la imagen");
-    this._subirArchivoService.subirArchivo(this.imagenSubir,this.associate._id)
+    this._subirArchivoService.subirArchivo(this.imagenSubir,this.position._id)
       .then((resp)=>{  
-        this.router.navigate(['/welcomeAssociate',this.associate._id]);
+        this.router.navigate(['/welcomeAssociate',this.position._id]);
       })
       .catch((error)=>{
         console.log(error);

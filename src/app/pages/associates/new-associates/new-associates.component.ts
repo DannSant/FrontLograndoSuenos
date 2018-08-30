@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Associate } from '../../../models/associate.model';
 import { AssociateService } from '../../../services/associate.service';
 import { AlertService } from '../../../services/alert.service';
+import { PositionService } from '../../../services/position.service';
+import { Position } from '../../../models/position.model';
 
 @Component({
   selector: 'app-new-associates',
@@ -10,20 +12,21 @@ import { AlertService } from '../../../services/alert.service';
 })
 export class NewAssociatesComponent implements OnInit {
 
-  selectedAssociate:Associate;
-  associates:Associate[]=[];
+  selectedPosition:Position;
+  positions:Position[]=[];
 
   constructor(
-    public _associates:AssociateService,
+    public _positions:PositionService,
     public _alert:AlertService
   ) { }
 
   ngOnInit() {
-    this._associates.getNewAssociates().subscribe((resp:any)=>{
+    this._positions.getNewPositions().subscribe((resp:any)=>{
+     
       if(resp.ok){
-        this.associates=resp.data;
+        this.positions=resp.data;
       }else {
-        this._alert.showAlert("Error","Error al cargar afiliados","error");
+        this._alert.showAlert("Error","Error al cargar posiciones de afiliados","error");
       }
     })
   }
