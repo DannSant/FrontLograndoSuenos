@@ -9,6 +9,8 @@ import { StatesService } from '../../services/states.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { State } from '../../models/state.model';
+import { Position } from '../../models/position.model';
+import { User } from '../../models/user.model';
 
 
 @Component({
@@ -30,6 +32,8 @@ export class RegisterComponent implements OnInit {
   states:State[] = [];
 
   associate:Associate={};
+  user:User={};
+  position:Position={};
 
   errors:string="";
   phase:string="init";
@@ -108,7 +112,7 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
-    this._associates.createFirstAssociate(this.associate).subscribe((resp:any)=>{
+    this._associates.registerAssociate(this.associate,this.user,this.position).subscribe((resp:any)=>{
       //console.log(resp);
       if(resp.ok){
         let id = resp.data.associate._id;

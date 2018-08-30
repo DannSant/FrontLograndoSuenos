@@ -162,7 +162,7 @@ export class UserService {
       let errorMessage = e.error.error.message;
       console.error(errorMessage);
       if(e.status==409){
-        this._alert.showAlert("Error","Ha ocurrido un error al usuario, el email "+user.email.toUpperCase()+" está ya registrado en la base de datos","error");
+        this._alert.showAlert("Error","Ha ocurrido un error al usuario, el usuario "+user.username.toUpperCase()+" está ya registrado en la base de datos","error");
       }else {
         this._alert.showAlert("Error al crear usuario","Ha ocurrido al crear usuario, intente nuevamente despues de recargar la pagina","error");
       }
@@ -215,7 +215,7 @@ export class UserService {
     let url = SERVICE_URL + "/email/welcome";
     let headers = new HttpHeaders({token:this.token});
     let body = {
-      userEmail:user.email,
+      userEmail:user.username,
       personalEmail:personalEmail,
       userName:user.name,
       userUserName:user.username,

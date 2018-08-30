@@ -46,9 +46,9 @@ export class DownloadDatabaseComponent implements OnInit {
     let db:any[] = []
     for (let associate of this.associates){
       let row = {
-        num:associate.id,
-        nombre:associate.name,
-        PagoRealizado:associate.payAmmount,
+        num:1,
+        nombre:associate.user.name,
+        PagoRealizado:106,
         banco:associate.bank.name,
         cuenta:associate.account.toString(),
         clabe:associate.clabe.toString(),

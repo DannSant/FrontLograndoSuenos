@@ -32,7 +32,7 @@ export class AssociatesListComponent implements OnInit {
   deleteAssociate(associate:Associate){
     this._associates.deleteAssociate(associate).subscribe((resp:any)=>{
       if(resp.ok){
-       this._alert.showAlert("Todo bien","El afiliado " + associate.name.toUpperCase() + " fue eliminado con éxito","success");
+       this._alert.showAlert("Todo bien","El afiliado " + associate.user.name.toUpperCase() + " fue eliminado con éxito","success");
        this.listAssociates();
       }else {
         this._alert.showAlert("Error","Error al borrar afiliado","error");
