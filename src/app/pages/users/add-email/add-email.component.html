@@ -4,7 +4,7 @@
     </div>
     <div class="row">
         <div class="col-md-7">
-            <form #f="ngForm" (ngSubmit)="createUser(f)" ngNativeValidation>
+            <form #f="ngForm" (ngSubmit)="addEmail(f)" ngNativeValidation>
                 <!-- email DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': email.errors?.required && email.touched}">
                     <label for="email">Email</label>

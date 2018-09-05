@@ -1,38 +1,40 @@
 <div class="container main-container">
-  <div class="row">
-    <div class="col-md-10">
-      <h3>Datos del usuario</h3>
-      <table class="table table-striped">
-        <tbody>
-          <tr>
-            <th scope="row">Nombre</th>
-            <td>{{user.name}}</td>
+    <div class="row">
+        <div class="col-md-10">
+            <h3>Datos del usuario</h3>
+            <p>Se acaba de agregar a este su usuario el correo electronico de su nueva posición</p>
+            <p *ngIf="position.isFirst">Tambien se mandó un email notificando sus credenciales de acceso al sitio web de Logrando Sueños 7</p>
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th scope="row">Nombre</th>
+                        <td>{{user.name}} {{user.lastname}}</td>
 
-          </tr>
-          <tr>
-              <th scope="row">Correo</th>
-              <td>{{user.email}}</td>
-          </tr>
-          <tr>
-              <th scope="row">Usuario</th>
-              <td>{{user.username}}</td>
-          </tr>         
-          <tr>
-              <th scope="row">Controles</th>
-              <td>
-                <button type="button" class="btn btn-info">Modificar</button>
-                <button type="button" class="btn btn-danger"
+                    </tr>
+                    <tr>
+                        <th scope="row">Correo</th>
+                        <td>{{position.email}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Usuario</th>
+                        <td>{{user.username}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Controles</th>
+                        <td>
+                            <button type="button" class="btn btn-info">Modificar</button>
+                            <!-- <button type="button" class="btn btn-danger"
                 mat-raised-button
                   matTooltip="Precaución, si eliminas a este afiliado ya no podrá ingresar al sistema"
                   matTooltipPosition="after"
                   matTooltipClass="medium-tooltip-danger"
                 >
                   Eliminar
-                </button>
-              </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>  
-  </div>
+                </button> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

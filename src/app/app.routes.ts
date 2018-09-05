@@ -5,7 +5,7 @@ import { BoucherUploadComponent } from './pages/boucher-upload/boucher-upload.co
 import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
 import { LoginGuard } from './services/guards/login.guard';
 import { AdminGuard } from './services/guards/admin.guard';
-import { AddEmailComponent } from './pages/users/add-email/add-emial.component';
+import { AddEmailComponent } from './pages/users/add-email/add-email.component';
 import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
@@ -47,7 +47,7 @@ const app_routes: Routes = [
   { 
     path: 'associateDetail/:id',
     component: AssociateDetailComponent ,
-    canActivate: [AdminGuard,VerifyTokenGuard]
+    canActivate: [VerifyTokenGuard]
   },
   { 
     path: 'addEmail/:associate_id',

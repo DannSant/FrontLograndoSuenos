@@ -23,7 +23,7 @@ export class WelcomeAssociateComponent implements OnInit {
     this.activatedRoute.params.subscribe((params:any)=>{
       let id=params.id;
       this._positions.getPosition(id).subscribe((resp:any)=>{
-        console.log(resp);
+        //console.log(resp);
         if(resp.ok){
           this.position=resp.data;
         }

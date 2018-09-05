@@ -6,19 +6,19 @@
         <div class="col-md-7">
             <form #f="ngForm" (ngSubmit)="updateUser(f)" ngNativeValidation>
                 <!-- EMAIL DEL ASOCIADO -->
-                <div class="form-group" >
+                <!-- <div class="form-group" >
                     <label for="email">Email</label>
                     <input type="email" name="email" [(ngModel)]="user.email" class="form-control" placeholder="Ingresar email" readonly>
                    
-                </div>
+                </div> -->
 
-                
+
 
                 <!-- User DEL ASOCIADO -->
                 <div class="form-group">
                     <label for="username">Usuario</label>
                     <input type="text" name="username" [(ngModel)]="user.username" class="form-control" placeholder="Ingresar usuario" readonly>
-                 
+
                 </div>
 
                 <!-- NOMBRE DEL ASOCIADO -->
@@ -31,19 +31,19 @@
                 </div>
 
                 <hr>
-                <label >Cambiar contraseña:</label>
+                <label>Cambiar contraseña:</label>
                 <!-- Password DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': errors=='PASSWORD_MATCH'}">
                     <label for="password1">Nueva Contraseña</label>
-                    <input type="password" name="password1" [(ngModel)]="password1" class="form-control" placeholder="Ingresar nueva contraseña"  >
-                  
+                    <input type="password" name="password1" [(ngModel)]="password1" class="form-control" placeholder="Ingresar nueva contraseña">
+
                 </div>
 
-                 <!-- REPETIR Password DEL ASOCIADO -->
-                 <div class="form-group" [ngClass]="{'has-danger': errors=='PASSWORD_MATCH'}">
+                <!-- REPETIR Password DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': errors=='PASSWORD_MATCH'}">
                     <label for="password2">Repetir Contraseña</label>
-                    <input type="password" name="password2" [(ngModel)]="password2" class="form-control" placeholder="Repetir contraseña"  >
-                 
+                    <input type="password" name="password2" [(ngModel)]="password2" class="form-control" placeholder="Repetir contraseña">
+
                 </div>
 
                 <div class="alert alert-danger" *ngIf="errors=='PASSWORD_MATCH'">

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../../models/user.model';
 import { UserService } from '../../../services/user.service';
 import { AlertService } from '../../../services/alert.service';
+import { Position } from '../../../models/position.model';
+import { PositionService } from '../../../services/position.service';
 
 @Component({
   selector: 'app-view-user',
@@ -10,22 +12,24 @@ import { AlertService } from '../../../services/alert.service';
   styles: []
 })
 export class ViewUserComponent implements OnInit {
+  position:Position={};
   user:User={};
   constructor(
     public activatedRoute:ActivatedRoute,
-    public _userService:UserService,
+    public _positions:PositionService,
     public _alert:AlertService
   ) { 
     this.activatedRoute.params.subscribe((params:any)=>{
       let id = params.id;
       
-      this._userService.getUser(id).subscribe((resp:any)=>{
+      this._positions.getPosition(id).subscribe((resp:any)=>{
        
         if(resp.ok){
-          this.user = resp.data;
+          this.position = resp.data;
+          this.user=this.position.associate.user;
         }else {
           this._alert.showAlert("Error","Error al recuperar datos del usuario","error");
-          this.user={};
+          this.position={};
         }
       })
     });

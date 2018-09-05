@@ -8,6 +8,7 @@ export class Position {
     public paymentNumber?:string,
     public paymentBaucher?:string,
     public email?:string,
+    public isFirst?:boolean,
     public associate?:Associate,
     public _id?:string
   ){}

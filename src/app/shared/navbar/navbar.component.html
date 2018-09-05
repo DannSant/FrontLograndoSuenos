@@ -43,9 +43,11 @@
             <li class="nav-item dropdown" *ngIf="_userService.isAuthenticated()">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      Mi Perfil
-                    </a>
+                </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" [routerLink]="['/profile',_userService.loggedUser._id]">Cambiar contraseña</a>
                     <a class="dropdown-item" [routerLink]="['/profile',_userService.loggedUser._id]">Modificar datos</a>
+                    <a class="dropdown-item" [routerLink]="['/profile',_userService.loggedUser._id]">Mis posiciones</a>
                     <a class="dropdown-item" routerLink="/notifications">Notificaciones</a>
                 </div>
             </li>

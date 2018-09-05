@@ -49,7 +49,7 @@ export class AddEmailComponent implements OnInit {
     
   }
 
-  createUser(f:NgForm){
+  addEmail(f:NgForm){
     if(f.invalid){
       this._alert.showAlert("Error", "Faltan datos de capturar", "error");
       return;
@@ -58,11 +58,17 @@ export class AddEmailComponent implements OnInit {
     this._positions.updateEmailInPosition(this.position).subscribe((resp:any)=>{
       this._alert.closeWaitWindow();
       if (resp.ok){
-        //Enviar email
-        //this._userService.sendWelcomeMail(this.user,this.position.associate.personalEmail,this.position.email).subscribe();
+        //Enviar email si es la primera posicion de este afiliado
+        if(this.position.isFirst){
+          this._userService.sendWelcomeMail(
+            this.position.associate.user, //Usuario al que se va a mandar el email, aqui vienen datos como username y password
+            this.position.associate.personalEmail, //email personal, que es donde se mandará la info
+            this.position.email //email de logrando suenos recien creado, se envía en el cuerpo del correo
+          ).subscribe();
+        }        
         //redireccionar a pantalla con el link
         let id = resp.data._id;
-        //this.router.navigate(['/viewUser',id]);
+        this.router.navigate(['/viewUser',id]);
       }else {
         console.log(resp);
         this._alert.showAlert("Error","Ocurrio un error al dar de alta el usuario","error")

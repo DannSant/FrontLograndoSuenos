@@ -57,7 +57,8 @@ export class AssociateService {
 
   updateAssociate(associate:Associate){
     let url = SERVICE_URL + "/associate/" + associate._id;
-    return this.http.put(url,associate).catch((e)=>{        
+    let headers = new HttpHeaders({token:this._userService.token})
+    return this.http.put(url,associate,{headers}).catch((e)=>{        
       if (!e.error.error){
         console.log(e); 
         return

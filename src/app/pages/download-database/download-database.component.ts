@@ -3,6 +3,9 @@ import { AssociateService } from '../../services/associate.service';
 import { Associate } from '../../models/associate.model';
 import { AlertService } from '../../services/alert.service';
 import { Angular5Csv } from 'angular5-csv/Angular5-csv';
+import { PositionService } from '../../services/position.service';
+import { Position } from '../../models/position.model';
+import { UtilsService } from '../../services/utils.service';
  
 @Component({
   selector: 'app-download-database',
@@ -12,19 +15,20 @@ import { Angular5Csv } from 'angular5-csv/Angular5-csv';
 export class DownloadDatabaseComponent implements OnInit {
 
   constructor(
-    public _associates:AssociateService,
-    public _alert:AlertService
+    public _positions:PositionService,
+    public _alert:AlertService,
+    public _utils:UtilsService
   ) { }
 
-  associates:Associate[] = [];
+  positions:Position[] = [];
 
   ngOnInit() {
     this._alert.showWaitWindow("Cargando","Estamos extrayendo la informacion de la base de datos, esto puede tardar unos momentos");
-    this._associates.listAssociates().subscribe((resp:any)=>{
+    this._positions.getAllPositions().subscribe((resp:any)=>{
       this._alert.closeWaitWindow();
      
       if(resp.ok){
-        this.associates=resp.data;
+        this.positions=resp.data;
       }
     })
   }
@@ -44,21 +48,21 @@ export class DownloadDatabaseComponent implements OnInit {
 
   generateDB(){
     let db:any[] = []
-    for (let associate of this.associates){
+    for (let position of this.positions){
       let row = {
-        num:1,
-        nombre:associate.user.name,
-        PagoRealizado:106,
-        banco:associate.bank.name,
-        cuenta:associate.account.toString(),
-        clabe:associate.clabe.toString(),
-        tarjeta:associate.card.toString(),
-        birthDate: associate.birthDate,
-        curp:associate.curp,
-        rfc:associate.rfc,
-        movil:associate.cellphone.toString(),
-        domicilio:associate.address,
-        estado:associate.state.name
+        num:position.position_number,
+        nombre: this._utils.validateString(position.associate.user.name,'SIN NOMBRE') + this._utils.validateString(position.associate.user.lastname,''),
+        PagoRealizado:position.payAmmount,
+        banco:this._utils.validateBank(position.associate.bank,'SIN BANCO'),
+        cuenta:this._utils.validateString(position.associate.account,'SIN CUENTA'),
+        clabe:this._utils.validateString(position.associate.clabe,'SIN CLABE'),
+        tarjeta:this._utils.validateString(position.associate.card,'SIN TARJETA'),
+        birthDate: position.associate.birthDate,
+        curp:this._utils.validateString(position.associate.curp,'SIN CURP'),
+        rfc:this._utils.validateString(position.associate.rfc,'SIN RFC'),
+        movil:this._utils.validateString(position.associate.cellphone,'SIN MOVIL'),
+        domicilio:this._utils.validateString(position.associate.address,'SIN DOMICILIO'),
+        estado:this._utils.validateState(position.associate.state,'SIN ESTADO')
       }
       db.push(row);
     } 

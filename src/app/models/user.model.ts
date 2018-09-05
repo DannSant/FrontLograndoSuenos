@@ -1,7 +1,8 @@
 import { Associate } from './associate.model';
 export class User {
     constructor(
-        public name?:string,      
+        public name?:string, 
+        public lastname?:string,    
         public role?:string,
         public password?:string,
         public username?:string,

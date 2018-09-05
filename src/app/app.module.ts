@@ -15,7 +15,7 @@ import { NavbarComponent } from './shared/navbar/navbar.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BoucherUploadComponent } from './pages/boucher-upload/boucher-upload.component';
 import { DownloadDatabaseComponent } from './pages/download-database/download-database.component';
-import { AddEmailComponent } from './pages/users/add-email/add-emial.component';
+import { AddEmailComponent } from './pages/users/add-email/add-email.component';
 import { ViewUserComponent } from './pages/users/view-user/view-user.component';
 import { NewAssociatesComponent } from './pages/associates/new-associates/new-associates.component';
 import { WelcomeAssociateComponent } from './pages/associates/welcome-associate/welcome-associate.component';
@@ -46,6 +46,7 @@ import { AdminGuard } from './services/guards/admin.guard';
 import { NotificationService } from './services/notification.service';
 import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 import { PositionService } from './services/position.service';
+import { UtilsService } from './services/utils.service';
 
 //Pipes
 import { ImagenPipe } from './pipes/imagen.pipe';
@@ -55,6 +56,7 @@ import { StatusHandlerPipe } from './pipes/status-handler.pipe';
 //Otros
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
+
 
 
 registerLocaleData(localeEs);
@@ -109,7 +111,8 @@ registerLocaleData(localeEs);
     AdminGuard,
     NotificationService,
     VerifyTokenGuard,
-    PositionService
+    PositionService,
+    UtilsService
   ],
   bootstrap: [AppComponent]
 })
