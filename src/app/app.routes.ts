@@ -17,6 +17,7 @@ import { VerifyTokenGuard } from './services/guards/verify-token.guard';
 import { AboutComponent } from './pages/about/about.component';
 import { AssociatesListComponent } from './pages/associates/associates-list/associates-list.component';
 import { AssociateDetailComponent } from './pages/associates/associates-list/associate-detail.component';
+import { PositionListComponent } from './pages/associates/position-list/position-list.component';
 
 const app_routes: Routes = [
   { path: 'home', component: HomeComponent }, 
@@ -28,7 +29,12 @@ const app_routes: Routes = [
     path: 'profile/:id', 
     component: ProfileComponent,
     canActivate:[LoginGuard,VerifyTokenGuard]
-  }, 
+  },
+  { 
+    path: 'positionList/:id', 
+    component: PositionListComponent,
+    canActivate:[LoginGuard,VerifyTokenGuard]
+  },  
   { 
     path: 'downloadDB',
     component: DownloadDatabaseComponent ,

@@ -46,8 +46,8 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" [routerLink]="['/profile',_userService.loggedUser._id]">Cambiar contraseña</a>
-                    <a class="dropdown-item" [routerLink]="['/profile',_userService.loggedUser._id]">Modificar datos</a>
-                    <a class="dropdown-item" [routerLink]="['/profile',_userService.loggedUser._id]">Mis posiciones</a>
+                    <a *ngIf="_userService.loggedUser.role!='ADMIN_ROLE'" class="dropdown-item" [routerLink]="['/associateDetail',_userService.associate._id]">Modificar datos</a>
+                    <a *ngIf="_userService.loggedUser.role!='ADMIN_ROLE'" class="dropdown-item" [routerLink]="['/positionList',_userService.associate._id]">Mis posiciones</a>
                     <a class="dropdown-item" routerLink="/notifications">Notificaciones</a>
                 </div>
             </li>

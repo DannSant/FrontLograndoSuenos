@@ -6,13 +6,15 @@ import 'rxjs/Rx';
 import { Observable } from 'rxjs/Rx';
 import { AlertService } from './alert.service';
 import { Router } from '@angular/router';
+import { Associate } from '../models/associate.model';
 
 @Injectable()
 export class UserService {
 
   token:string="";
   loggedUser:User;
-  username:string
+  username:string;
+  associate:Associate;
 
   //Constantes
   USER_ROLES = ["USER_ROLE","ADMIN_ROLE"];
@@ -34,7 +36,7 @@ export class UserService {
     return this.http.post(url,{},{headers}).map((resp:any)=>{
      
       if(resp.ok){
-        this.guardarStorage(resp.data._id,resp.token,resp.data);
+        this.guardarStorage(resp.data._id,resp.token,resp.data,this.associate);
        
       }else {
         this.token="";
@@ -63,7 +65,7 @@ export class UserService {
     });
 
     return this.http.get(url,{headers}).map((resp:any)=>{      
-      this.guardarStorage(this.loggedUser._id,resp.token,this.loggedUser);
+      this.guardarStorage(this.loggedUser._id,resp.token,this.loggedUser,this.associate);
       return true;
     }).catch((e)=>{
      let errorMessage= e.error.error.message;       
@@ -95,9 +97,11 @@ export class UserService {
     if(localStorage.getItem('token')){
       this.token = localStorage.getItem("token");      
       this.loggedUser = JSON.parse(localStorage.getItem("user"));
+      this.associate=JSON.parse(localStorage.getItem("associate"));
     }else {
       this.token = "";
       this.loggedUser=null;
+      this.associate=null;
     }
 
     if(localStorage.getItem("username")){
@@ -106,12 +110,14 @@ export class UserService {
     
   }
 
-  guardarStorage(id:string,token:string,user:User){
+  guardarStorage(id:string,token:string,user:User,associate:Associate){
    localStorage.setItem("id",id);
    localStorage.setItem("token",token);
    localStorage.setItem("user",JSON.stringify(user));
+   localStorage.setItem("associate",JSON.stringify(associate));
    this.loggedUser=user;
    this.token=token;
+   this.associate=associate;
   }
 
   login(username:string,password:string,remember:boolean){
@@ -123,7 +129,7 @@ export class UserService {
     return this.http.post(url,{username,password}).map((resp:any)=>{
      
       if(resp.ok){
-        this.guardarStorage(resp.data._id,resp.token,resp.data);
+        this.guardarStorage(resp.data.user._id,resp.token,resp.data.user,resp.data.associate);
       }else {
         this.token="";
         this.loggedUser=null;

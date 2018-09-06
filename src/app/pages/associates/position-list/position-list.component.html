@@ -1,0 +1,38 @@
+<div class="container main-container">
+    <h3>Posiciones registradas</h3>
+    <hr>
+    <button class="btn btn-warning">Nueva Posición</button>
+    <br>
+    <div class="row" *ngIf="positions.length<=0">
+        <div class="col-md-12">
+            <div class="alert alert-warning" role="alert">
+                No hay posiciones de momento
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="positions.length>0">
+        <div class="col-md-8">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Numero de posición</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">Folio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let position of positions">
+                        <th scope="row">{{position.position_number}}</th>
+                        <td>{{position.email}}</td>
+
+                        <td>{{position.paymentDate}}</td>
+                        <td>{{position.paymentNumber}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

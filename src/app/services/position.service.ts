@@ -35,6 +35,24 @@ export class PositionService {
     });
   }
 
+  getMyPositions(associateId:string){
+    let url = SERVICE_URL+"/position/mine?associateId="+associateId;
+    let headers = new HttpHeaders({token:this._userService.token})
+    return this.http.get(url,{headers}).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      
+      this._alert.showAlert("Error al obtener datos","Ha ocurrido al recuperar los datos de las posiciones, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      
+    
+      return Observable.throw(e);
+    });
+  }
+
   getAllPositions(){
     let url = SERVICE_URL+"/position/all";
     let headers = new HttpHeaders({token:this._userService.token})
