@@ -3,6 +3,7 @@ import { NotificationService } from '../../../services/notification.service';
 import { AlertService } from '../../../services/alert.service';
 import { UserService } from '../../../services/user.service';
 import { PaginationComponent } from '../../../components/pagination/pagination.component';
+import { Notification } from '../../../models/notification.model';
 
 @Component({
   selector: 'app-notifications-feed',

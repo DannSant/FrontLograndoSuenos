@@ -1,0 +1,73 @@
+<div class="container main-container">
+
+    <div class="row">
+        <div class="col-md-7">
+            <h2>Registrate</h2>
+            <form #f="ngForm" (ngSubmit)="newPosition(f)" ngNativeValidation>
+
+                <!--MONTO DEL PAGO -->
+                <div class="form-group" [ngClass]="{'has-danger': payAmmount.errors && payAmmount.touched}">
+                    <label for="payAmmount">Monto del Pago</label>
+                    <input type="number" name="payAmmount" [(ngModel)]="position.payAmmount" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar monto de pago" #payAmmount="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="payAmmount.errors?.required && payAmmount.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="payAmmount.errors?.pattern && payAmmount.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!--FOLIO DEL PAGO -->
+                <div class="form-group" [ngClass]="{'has-danger': paymentNumber.errors && paymentNumber.touched}">
+                    <label for="paymentNumber">Folio del pago</label>
+                    <input type="text" name="paymentNumber" [(ngModel)]="position.paymentNumber" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar folio del pago" #paymentNumber="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="paymentNumber.errors?.required && paymentNumber.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="paymentNumber.errors?.pattern && paymentNumber.touched">
+                        <small>Este debe ser numerico</small>
+                    </div>
+                </div>
+
+                <!--FECHA DE PAGO -->
+                <div [ngClass]="{'has-danger': paymentDate.errors && paymentDate.touched}">
+                    <mat-form-field color="accent">
+                        <mat-label for="paymentDate">
+                            Fecha de pago
+                        </mat-label>
+                        <input matInput [matDatepicker]="paymentDatepicker" name="paymentDate" [(ngModel)]="position.paymentDate" #paymentDate="ngModel" required>
+                        <mat-datepicker-toggle [for]="paymentDatepicker"></mat-datepicker-toggle>
+                        <mat-datepicker #paymentDatepicker></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <div class="alert alert-danger" *ngIf="paymentDate.errors?.required && paymentDate.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="paymentNumber">Foto del comprobante</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="custom-file">
+                                <input type="file" id="customFile" (change)="seleccionImagen($event.target.files[0])">
+                                <!-- <label  class="custom-file-label" for="customFile">Selecciona el archivo</label> -->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <img *ngIf="!imagenTemp" [src]="'xxx' | imagen" class="w150">
+                            <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" *ngIf="paymentNumber.errors?.required && paymentNumber.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Enviar datos</button>
+            </form>
+        </div>
+
+    </div>
+</div>

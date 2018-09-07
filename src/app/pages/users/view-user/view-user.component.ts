@@ -12,7 +12,7 @@ import { PositionService } from '../../../services/position.service';
   styles: []
 })
 export class ViewUserComponent implements OnInit {
-  position:Position={};
+  position:Position={associate:{}};
   user:User={};
   constructor(
     public activatedRoute:ActivatedRoute,

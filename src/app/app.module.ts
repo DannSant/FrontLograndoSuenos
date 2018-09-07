@@ -57,6 +57,7 @@ import { StatusHandlerPipe } from './pipes/status-handler.pipe';
 import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { PositionListComponent } from './pages/associates/position-list/position-list.component';
+import { NewPositionComponent } from './pages/associates/new-position/new-position.component';
 
 
 
@@ -86,7 +87,8 @@ registerLocaleData(localeEs);
     AboutComponent,
     AssociatesListComponent,
     AssociateDetailComponent,
-    PositionListComponent
+    PositionListComponent,
+    NewPositionComponent
   ],
   imports: [
     BrowserModule,

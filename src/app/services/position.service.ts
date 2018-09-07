@@ -107,4 +107,22 @@ export class PositionService {
     });
   }
 
+  registerAditionalPosition(position:Position,associateId:string){
+    let url = SERVICE_URL+"/position/add/"+associateId;
+    let headers = new HttpHeaders({token:this._userService.token})
+    return this.http.post(url,position,{headers}).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      
+      this._alert.showAlert("Error al obtener datos","Ha ocurrido al recuperar los datos del nuevo registro, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      
+    
+      return Observable.throw(e);
+    });
+  }
+
 }

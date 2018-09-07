@@ -22,7 +22,7 @@
                     <tr>
                         <th scope="row">Controles</th>
                         <td>
-                            <button type="button" class="btn btn-info">Modificar</button>
+                            <button [routerLink]="['/associateDetail',position.associate._id]" type="button" class="btn btn-info">Modificar</button>
                             <!-- <button type="button" class="btn btn-danger"
                 mat-raised-button
                   matTooltip="Precaución, si eliminas a este afiliado ya no podrá ingresar al sistema"

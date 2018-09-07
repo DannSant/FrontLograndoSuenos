@@ -38,8 +38,7 @@
         <div class="col-md-4" *ngIf="selectedPosition">
             <div class="card">
                 <div class="card-header">
-                    {{selectedPosition.associate.user.name}}
-                    {{selectedPosition.associate.user.lastname}}
+                    {{selectedPosition.associate.user.name}} {{selectedPosition.associate.user.lastname}}
                 </div>
                 <div class="card-body">
                     <table>
@@ -69,11 +68,11 @@
                         </tr>
                         <tr>
                             <td>Fecha de nacimiento:</td>
-                            <td> {{selectedPosition.associate.birthDate}}</td>
+                            <td> {{selectedPosition.associate.birthDate | date:'short'}}</td>
                         </tr>
                         <tr>
                             <td>Fecha de registro:</td>
-                            <td> {{selectedPosition.associate.creationDate}}</td>
+                            <td> {{selectedPosition.associate.creationDate | date:'short'}}</td>
                         </tr>
                         <tr>
                             <td>Monto de pago:</td>
