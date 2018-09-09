@@ -40,7 +40,7 @@ export class SubirArchivoService {
       }else {
         url=SERVICE_URL +'/'+route;
       }
-      console.log(url);
+      
       xhr.open(method,url,true);
       xhr.send( formData );
     });

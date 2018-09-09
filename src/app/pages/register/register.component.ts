@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
 import { BankService } from '../../services/bank.service';
 import { AssociateService } from '../../services/associate.service';
@@ -12,6 +12,7 @@ import { State } from '../../models/state.model';
 import { Position } from '../../models/position.model';
 import { User } from '../../models/user.model';
 import { UtilsService } from '../../services/utils.service';
+import { ReCaptchaComponent } from 'angular2-recaptcha';
 
 
 @Component({
@@ -39,6 +40,8 @@ export class RegisterComponent implements OnInit {
   errors:string="";
   phase:string="init";
 
+  @ViewChild(ReCaptchaComponent) captcha: ReCaptchaComponent;
+
   constructor(
     public _alert:AlertService,
     public _banks:BankService,
@@ -56,6 +59,7 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+    
     this._banks.loadAllBanks().subscribe((resp:any)=>{
       
       if(resp.ok){
@@ -82,6 +86,10 @@ export class RegisterComponent implements OnInit {
     this.associate.bank = {_id:"0"};    
   }
 
+  handleCorrectCaptcha(event){
+    //console.log(event);
+  }
+
   register(f:NgForm){
 
     // if(this.associate.bank._id=="0"){
@@ -93,6 +101,12 @@ export class RegisterComponent implements OnInit {
     //   this.errors="MISSING_STATE";
     //   return;
     // }
+    let token = this.captcha.getResponse();
+    
+    if(token==undefined||token==''){
+      this._alert.showAlert("Error", "Favor de verificar el captcha (No soy un robot)", "error");
+      return;
+    }
 
     if(this._utils.getAge(this.associate.birthDate)<18){
       this.errors="UNDER_AGED";

@@ -8,6 +8,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatFormFieldModule,MatInputModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTooltipModule} from '@angular/material/tooltip'
+import { ReCaptchaModule } from 'angular2-recaptcha';
 
 //componentes
 import { AppComponent } from './app.component';
@@ -101,7 +102,8 @@ registerLocaleData(localeEs);
     MatFormFieldModule,
     MatInputModule,    
     BrowserAnimationsModule    ,
-    MatTooltipModule
+    MatTooltipModule,
+    ReCaptchaModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es' },
