@@ -10,6 +10,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { NgForm } from '@angular/forms';
 import { UtilsService } from '../../../services/utils.service';
+import { Position } from '../../../models/position.model';
+import { PositionService } from '../../../services/position.service';
 
 @Component({
   selector: 'app-associate-detail',
@@ -28,6 +30,8 @@ export class AssociateDetailComponent implements OnInit {
     user:{}
   };
 
+  firstPosition:Position;
+
   errors:string="";
   phase:string="init";
 
@@ -39,7 +43,8 @@ export class AssociateDetailComponent implements OnInit {
     public router:Router,
     public activatedRoute:ActivatedRoute,
     public _userService:UserService,
-    public _utils:UtilsService
+    public _utils:UtilsService,
+    public _positions:PositionService
   ) { }
 
   ngOnInit() {    
@@ -72,6 +77,14 @@ export class AssociateDetailComponent implements OnInit {
           this.associate={};
         }
       })
+
+      this._positions.getFirstPositions(id).subscribe((resp:any)=>{
+       
+        if(resp.ok){
+          this.firstPosition=resp.data
+        }
+      })
+
     });
   }
 
@@ -96,6 +109,24 @@ export class AssociateDetailComponent implements OnInit {
         console.log(resp.error);
       }
       
+    });
+  }
+
+  sendEmail(){
+   
+    this._userService.sendWelcomeMail(
+      this.associate.user, //Usuario al que se va a mandar el email, aqui vienen datos como username y password
+      this.associate.personalEmail, //email personal, que es donde se mandará la info
+      this.firstPosition.email, //email de logrando suenos recien creado, se envía en el cuerpo del correo
+      'lograndosuenos7'
+    ).subscribe((resp:any)=>{
+      
+      if(resp.ok){
+        this._alert.showAlert("Todo bien", "Se ha reenviado el correo de manera correcta", "success");
+      }else {
+        console.log(resp);
+        this._alert.showAlert("Error", "Error al enviar correo", "error");
+      }
     });
   }
 

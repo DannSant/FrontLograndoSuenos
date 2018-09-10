@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-md-7">
             <h3>Datos del afiliado</h3>
+            <button *ngIf="firstPosition" type="button" class="btn btn-info" (click)="sendEmail()">Reenviar email</button>
             <form #f="ngForm" (ngSubmit)="updateAssociate(f)" ngNativeValidation>
 
                 <!-- NOMBRE DEL ASOCIADO -->

@@ -13,7 +13,7 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Celular</th>
-
+                        <th scope="col">Usuario</th>
                         <th scope="col">Cuenta</th>
                         <th scope="col">Controles</th>
                     </tr>
@@ -22,7 +22,7 @@
                     <tr *ngFor="let associate of associates">
                         <th scope="row">{{associate.user.name}}</th>
                         <td>{{associate.cellphone}}</td>
-
+                        <td>{{associate.user.username}}</td>
                         <td>{{associate.account}}</td>
                         <td>
                             <button class="btn btn-danger" (click)="deleteAssociate(associate)"><i class="fas fa-eye"></i>Eliminar</button>

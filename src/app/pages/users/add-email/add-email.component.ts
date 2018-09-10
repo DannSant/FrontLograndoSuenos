@@ -50,6 +50,7 @@ export class AddEmailComponent implements OnInit {
   }
 
   addEmail(f:NgForm){
+    
     if(f.invalid){
       this._alert.showAlert("Error", "Faltan datos de capturar", "error");
       return;

@@ -3,11 +3,12 @@
     <div class="row">
         <div class="col-md-7">
             <h2>Registrate</h2>
+            <small style="color: darkred">Campos con asterisco (*) son obligatorios</small>
             <form #f="ngForm" (ngSubmit)="register(f)" ngNativeValidation>
 
                 <!-- NOMBRE DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': name.errors?.required && name.touched}">
-                    <label for="name">Nombre</label>
+                    <label for="name">Nombre *</label>
                     <input type="text" name="name" [(ngModel)]="user.name" class="form-control" placeholder="Ingresar nombre" #name="ngModel" required>
                     <div class="alert alert-danger" *ngIf="name.errors?.required && name.touched">
                         <small>Este campo es requerido</small>
@@ -16,7 +17,7 @@
 
                 <!-- APELLIDO DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': lastname.errors?.required && lastname.touched}">
-                    <label for="lastname">Apellidos</label>
+                    <label for="lastname">Apellidos *</label>
                     <input type="text" name="lastname" [(ngModel)]="user.lastname" class="form-control" placeholder="Ingresar apellidos" #lastname="ngModel" required>
                     <div class="alert alert-danger" *ngIf="lastname.errors?.required && lastname.touched">
                         <small>Este campo es requerido</small>
@@ -27,7 +28,7 @@
                 <div class="form-group" [ngClass]="{'has-danger': personalEmail.errors?.required && personalEmail.touched}" mat-raised-button matTooltip="En este correo te proporcionaremos tus datos de usuario, por lo que debe de ser un correo válido" matTooltipPosition="after"
                     matTooltipClass="medium-tooltip">
 
-                    <label for="personalEmail">Correo personal</label>
+                    <label for="personalEmail">Correo personal *</label>
                     <input type="email" name="personalEmail" [(ngModel)]="associate.personalEmail" class="form-control" placeholder="Ingresar email personal" #personalEmail="ngModel" required>
                     <div class="alert alert-danger" *ngIf="personalEmail.errors?.required && personalEmail.touched">
                         <small>Este campo es requerido</small>
@@ -36,7 +37,7 @@
 
                 <!-- MOVIL DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': cellphone.errors && cellphone.touched}">
-                    <label for="cellphone">Celular</label>
+                    <label for="cellphone">Celular *</label>
                     <input type="text" name="cellphone" [(ngModel)]="associate.cellphone" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar Telefono" #cellphone="ngModel" required maxlength=10>
                     <div class="alert alert-danger" *ngIf="cellphone.errors?.required && cellphone.touched">
                         <small>Este campo es requerido</small>
@@ -112,7 +113,7 @@
 
                 <!--RFC DEL AFILIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': rfc.errors && rfc.touched}">
-                    <label for="rfc">RFC</label>
+                    <label for="rfc">RFC *</label>
                     <input type="text" name="rfc" [(ngModel)]="associate.rfc" class="form-control" placeholder="Ingresar rfc" #rfc="ngModel" required maxlength=13>
                     <div class="alert alert-danger" *ngIf="rfc.errors?.required && rfc.touched">
                         <small>Este campo es requerido</small>
@@ -147,7 +148,7 @@
                 <div [ngClass]="{'has-danger': birthDate.errors && birthDate.touched}">
                     <mat-form-field color="accent">
                         <mat-label for="birthDate">
-                            Fecha de nacimiento
+                            Fecha de nacimiento *
                         </mat-label>
                         <input matInput [matDatepicker]="myDatepicker" name="birthDate" [(ngModel)]="associate.birthDate" #birthDate="ngModel" required>
                         <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
@@ -166,7 +167,7 @@
 
                 <!--MONTO DEL PAGO -->
                 <div class="form-group" [ngClass]="{'has-danger': payAmmount.errors && payAmmount.touched}">
-                    <label for="payAmmount">Monto del Pago</label>
+                    <label for="payAmmount">Monto del Pago *</label>
                     <input type="number" name="payAmmount" [(ngModel)]="position.payAmmount" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar monto de pago" #payAmmount="ngModel" required>
                     <div class="alert alert-danger" *ngIf="payAmmount.errors?.required && payAmmount.touched">
                         <small>Este campo es requerido</small>
@@ -178,7 +179,7 @@
 
                 <!--FOLIO DEL PAGO -->
                 <div class="form-group" *ngIf="associate.bank" [ngClass]="{'has-danger': paymentNumber.errors && paymentNumber.touched}">
-                    <label for="paymentNumber">Folio del pago</label>
+                    <label for="paymentNumber">Folio del pago *</label>
                     <input type="text" name="paymentNumber" [(ngModel)]="position.paymentNumber" pattern="^[0-9]*$" class="form-control" placeholder="Ingresar folio del pago" #paymentNumber="ngModel" required>
                     <div class="alert alert-danger" *ngIf="paymentNumber.errors?.required && paymentNumber.touched">
                         <small>Este campo es requerido</small>
@@ -192,7 +193,7 @@
                 <div [ngClass]="{'has-danger': paymentDate.errors && paymentDate.touched}">
                     <mat-form-field color="accent">
                         <mat-label for="paymentDate">
-                            Fecha de pago
+                            Fecha de pago *
                         </mat-label>
                         <input matInput [matDatepicker]="paymentDatepicker" name="paymentDate" [(ngModel)]="position.paymentDate" #paymentDate="ngModel" required>
                         <mat-datepicker-toggle [for]="paymentDatepicker"></mat-datepicker-toggle>
@@ -209,6 +210,43 @@
                 <br>
                 <button type="submit" class="btn btn-primary">Enviar datos</button>
             </form>
+        </div>
+
+        <div class="col-md-5">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col" colspan="2">Datos del depósito</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Cuenta:</th>
+                        <td>10255893381</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Clabe:</th>
+                        <td>137180102558933815</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Tarjeta:</th>
+                        <td>4169160343058591</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Nombre:</th>
+                        <td> Diana Larios Macias.</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Banco:</th>
+                        <td>Bancoppel</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">Cantidad:</th>
+                        <td>$106.00 ($100.00 para inscripción Mexicanos Unidos y $6.00 para transferencia bancaria)</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
     </div>

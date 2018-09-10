@@ -1,4 +1,4 @@
-<div class="container main-container">
+<div class="big-container">
     <h3>Posiciones registradas</h3>
     <hr>
     <button [routerLink]="['/newPosition',associateId]" class="btn btn-warning">Nueva Posición</button>
@@ -16,7 +16,9 @@
                 <thead>
                     <tr>
                         <th scope="col">Numero de posición</th>
-                        <th scope="col">Email</th>
+                        <th scope="col">Email Logrando Sueños</th>
+                        <th scope="col">Usuario Mexicanos Unidos</th>
+                        <th scope="col">Password Mexicanos unidos</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Folio</th>
                     </tr>
@@ -25,7 +27,8 @@
                     <tr *ngFor="let position of positions">
                         <th scope="row">{{position.position_number}}</th>
                         <td>{{position.email}}</td>
-
+                        <td>{{position.external_username}}</td>
+                        <td>{{position.external_password}}</td>
                         <td>{{position.paymentDate | date:'short'}}</td>
                         <td>{{position.paymentNumber}}</td>
                     </tr>

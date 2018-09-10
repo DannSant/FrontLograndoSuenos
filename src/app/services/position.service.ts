@@ -53,6 +53,24 @@ export class PositionService {
     });
   }
 
+  getFirstPositions(associateId:string){
+    let url = SERVICE_URL+"/position/first?associateId="+associateId;
+    let headers = new HttpHeaders({token:this._userService.token})
+    return this.http.get(url,{headers}).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      
+      this._alert.showAlert("Error al obtener datos","Ha ocurrido al recuperar los datos de las posiciones, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      
+    
+      return Observable.throw(e);
+    });
+  }
+
   getAllPositions(){
     let url = SERVICE_URL+"/position/all";
     let headers = new HttpHeaders({token:this._userService.token})
@@ -89,7 +107,7 @@ export class PositionService {
     });
   }
 
-  updateEmailInPosition(position:Position){
+  updateEmailInPosition(position:Position){    
     let url = SERVICE_URL+"/position/addEmail/"+position._id;
     let headers = new HttpHeaders({token:this._userService.token})
     return this.http.put(url,position,{headers}).catch((e)=>{ 

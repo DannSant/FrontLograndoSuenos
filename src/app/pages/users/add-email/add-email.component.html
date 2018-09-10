@@ -14,6 +14,24 @@
                     </div>
                 </div>
 
+                <!-- Usuario externo DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': external_username.errors?.required && external_username.touched}">
+                    <label for="external_username">Usuario Mexicanos Unidos</label>
+                    <input type="external_username" name="external_username" [(ngModel)]="position.external_username" class="form-control" placeholder="Ingresar usuario mexicanos unidos" #external_username="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="external_username.errors?.required && external_username.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
+                <!-- Password externo DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': external_password.errors?.required && external_password.touched}">
+                    <label for="external_password">Password Mexicanos Unidos</label>
+                    <input type="external_password" name="external_password" [(ngModel)]="position.external_password" class="form-control" placeholder="Ingresar password mexicanos unidos" #external_password="ngModel" required>
+                    <div class="alert alert-danger" *ngIf="external_password.errors?.required && external_password.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
+                </div>
+
                 <!-- NOMBRE DEL ASOCIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': name.errors?.required && name.touched}">
                     <label for="name">Nombre</label>

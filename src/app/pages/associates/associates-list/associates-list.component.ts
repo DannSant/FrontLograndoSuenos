@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Associate } from '../../../models/associate.model';
 import { AssociateService } from '../../../services/associate.service';
 import { AlertService } from '../../../services/alert.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-associates-list',
@@ -39,7 +40,5 @@ export class AssociatesListComponent implements OnInit {
       }
     })
   }
-
-
 
 }

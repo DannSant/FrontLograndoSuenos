@@ -217,7 +217,7 @@ export class UserService {
     });
   }
 
-  sendWelcomeMail(user:User, personalEmail:string,email:String){
+  sendWelcomeMail(user:User, personalEmail:string,email:String,password?:string){
     let url = SERVICE_URL + "/email/welcome";
     let headers = new HttpHeaders({token:this.token});
     let body = {
@@ -225,7 +225,7 @@ export class UserService {
       personalEmail:personalEmail,
       userName:user.name,
       userUserName:user.username,
-      userPassword:user.password
+      userPassword:(password?password:user.password)
     }
     return this.http.post(url,body,{headers}).catch((e)=>{      
       let errorMessage = e.error.error.message;
