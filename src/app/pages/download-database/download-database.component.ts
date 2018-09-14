@@ -28,6 +28,7 @@ export class DownloadDatabaseComponent implements OnInit {
       this._alert.closeWaitWindow();
      
       if(resp.ok){
+        console.log(resp);
         this.positions=resp.data;
       }
     })
@@ -40,7 +41,7 @@ export class DownloadDatabaseComponent implements OnInit {
       'Base',
       {
         showLabels:true,
-        headers: ['NUM','NOMBRE','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA','FECHA DE NACIMIENTO',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO']
+        headers: ['NUM','NOMBRE','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA','FECHA DE NACIMIENTO',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO', 'USUARIO']
       }
       
     );
@@ -62,7 +63,8 @@ export class DownloadDatabaseComponent implements OnInit {
         rfc:this._utils.validateString(position.associate.rfc,'SIN RFC'),
         movil:this._utils.validateString(position.associate.cellphone,'SIN MOVIL'),
         domicilio:this._utils.validateString(position.associate.address,'SIN DOMICILIO'),
-        estado:this._utils.validateState(position.associate.state,'SIN ESTADO')
+        estado:this._utils.validateState(position.associate.state,'SIN ESTADO'),
+        usuario: this._utils.validateString(position.associate.user.username,"SIN USUARIO")
       }
       db.push(row);
     } 

@@ -23,6 +23,7 @@ export class PositionListComponent implements OnInit {
       this.associateId= id;
       this._positions.getMyPositions(id).subscribe((resp)=>{
         if(resp.ok){
+          
           this.positions = resp.data;
         }
       })
