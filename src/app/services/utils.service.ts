@@ -119,6 +119,48 @@ export class UtilsService {
     return age;
   }
 
+  customDateFormat(date:any){
+   
+    let stringDate = date.substring(0,10);
+    let stringDay = stringDate.split("-")[2]
+    let stringMonth = stringDate.split("-")[1]
+    let stringYear = stringDate.split("-")[0]
+    let newDate= new Date(stringYear,stringMonth,stringDay );
+   
+    let response=""
+    let day = newDate.getDay() + 1
+    let month = newDate.getMonth() + 1
+    let year = newDate.getFullYear()
+    response = day + "-" + month + "-" + year
+    return response;
+  }
+
+  customStringFormat(value:string,defaultValue:string,digits:number=4,character=" "){
+    let response = "";
+    
+    response = this.validateString(value,defaultValue);
+
+    if(response==defaultValue){
+      return response;
+    }else {
+      response="";
+    }
+
+    if (value=="nodata"){
+      return value;
+    }
+
+    for (let i=0;i<value.length;i++){
+      if ((i)%digits==0){
+        response += character + value[i]
+      }else {
+        response += value[i]
+      }
+    }
+    
+    return response;
+  }
+
   
 
 }
