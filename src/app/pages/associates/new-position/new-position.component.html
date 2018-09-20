@@ -55,7 +55,9 @@
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <img *ngIf="!imagenTemp" [src]="'xxx' | imagen" class="w150">
+                            <!-- <img *ngIf="!imagenTemp" [src]="'xxx' | imagen" class="w150"> -->
+                            <img *ngIf="!imagenTemp" src="../../../../../../lograndosuenos7.com/admin/images/no-img.jpg" class="w150">
+                            <img *ngIf="!imagenTemp" src="../lograndosuenos7.com/admin/images/no-img.jpg" class="w150">
                             <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
                         </div>
                     </div>
