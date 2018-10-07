@@ -128,6 +128,23 @@ export class AssociateService {
     });
   }
 
+  searchAssociates(term:string){
+    let url = SERVICE_URL+"/associate/search/"+term;
+    return this.http.get(url).catch((e)=>{ 
+      if (!e.error.error){
+        console.log(e); 
+        return
+      }    
+      let errorMessage = e.error.error.message;
+      console.error(errorMessage);
+      
+      this._alert.showAlert("Error al obtener datos","Ha ocurrido al recuperar los datos del afiliado, intente nuevamente despues de recargar la pagina, si no funciona intente comunicarse con el administrador","error");
+      
+    
+      return Observable.throw(e);
+    });
+  }
+
   getNewAssociates(){
     let url = SERVICE_URL+"/associate/new";
     let headers = new HttpHeaders({token:this._userService.token})

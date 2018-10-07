@@ -88,6 +88,7 @@ export class AssociateDetailComponent implements OnInit {
     });
   }
 
+
   populateCatalogs(){
     this._banks.loadAllBanks().subscribe((resp:any)=>{
       

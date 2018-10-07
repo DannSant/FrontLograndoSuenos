@@ -6,6 +6,11 @@ import { SubirArchivoService } from '../../../services/subir-archivo.service';
 import { Position } from '../../../models/position.model';
 import { NgForm } from '@angular/forms';
 
+//import {ftpClient}  from 'ftp-client';
+//var ftpClient =  require('ftp-client');
+
+
+
 @Component({
   selector: 'app-new-position',
   templateUrl: './new-position.component.html',
@@ -17,6 +22,7 @@ export class NewPositionComponent implements OnInit {
   oculto:string = '';
   imagenSubir:File;
   imagenTemp:string;
+ 
   constructor(
     public _positions:PositionService,
     public _alert:AlertService,
@@ -31,6 +37,8 @@ export class NewPositionComponent implements OnInit {
       let id = params.id;
       this.associateId= id;      
     })
+
+   
   }
 
   
@@ -91,7 +99,7 @@ export class NewPositionComponent implements OnInit {
     }
 
     this._alert.showWaitWindow("Cargando","Espera un momento, estamos subiendo la imagen");
-    console.log(this.associateId);
+   
     this._positions.registerAditionalPosition(this.position,this.associateId).subscribe((resp:any)=>{
       //console.log(resp);
       if(resp.ok){

@@ -18,7 +18,7 @@
                 <tbody>
                     <tr *ngFor="let position of positions">
                         <th>{{position.position_number}}</th>
-                        <td>{{position.associate?.user?.name}}</td>
+                        <td>{{position.associate?.user?.name}} {{position.associate?.user?.lastname}}</td>
                         <td>{{position.payAmmount}}</td>
                         <td>{{position.associate?.bank?.name}}</td>
                     </tr>

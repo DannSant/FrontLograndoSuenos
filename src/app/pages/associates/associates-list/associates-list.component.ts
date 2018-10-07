@@ -11,6 +11,7 @@ import { UserService } from '../../../services/user.service';
 })
 export class AssociatesListComponent implements OnInit {
   associates:Associate[] = [];
+  term:string="";
   constructor(
     public _associates:AssociateService,
     public _alert:AlertService
@@ -28,6 +29,24 @@ export class AssociatesListComponent implements OnInit {
         this._alert.showAlert("Error","Error al cargar afiliados","error");
       }
     })
+  }
+
+  
+  search(){
+
+    if(this.term==undefined || this.term.length<=0){
+      this.listAssociates();
+      return;
+    }
+
+    this._associates.searchAssociates(this.term).subscribe((resp:any)=>{
+      if(resp.ok){
+        this.associates=resp.data;
+      }else {
+        this._alert.showAlert("Error","Error al cargar afiliados","error");
+      }
+    })
+   
   }
 
   deleteAssociate(associate:Associate){
