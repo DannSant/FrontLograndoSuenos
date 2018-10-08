@@ -77,7 +77,8 @@ export class AssociateService {
 
   deleteAssociate(associate:Associate){
     let url = SERVICE_URL + "/associate/delete/" + associate._id;
-    return this.http.post(url,associate).catch((e)=>{        
+    let headers = new HttpHeaders({token:this._userService.token})
+    return this.http.post(url,associate,{headers}).catch((e)=>{        
       if (!e.error.error){
         console.log(e); 
         return

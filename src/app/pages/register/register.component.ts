@@ -14,6 +14,7 @@ import { User } from '../../models/user.model';
 import { UtilsService } from '../../services/utils.service';
 import { ReCaptchaComponent } from 'angular2-recaptcha';
 
+declare var $ :any;
 
 @Component({
   selector: 'app-register',
@@ -32,10 +33,17 @@ export class RegisterComponent implements OnInit {
   banks:Bank[] = [];
   selectedBank:Bank;
   states:State[] = [];
+  
 
   associate:Associate={};
   user:User={};
   position:Position={};
+
+  //Modal Control
+  userReferenceText="";
+  searchTerm="";
+  show=false;
+  foundUsers:User[]=[];
 
   errors:string="";
   phase:string="init";
@@ -137,6 +145,33 @@ export class RegisterComponent implements OnInit {
         this._alert.showAlert("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error");
       }
     });
+  }
+
+  showModal(){
+    this.searchTerm="";
+    this.foundUsers=[];
+    this.show=true;
+  }
+
+  searchUsers(){
+  
+    if (this.searchTerm==undefined || this.searchTerm.length<=3){
+      this.foundUsers=[];
+      return;
+    }
+    
+    this._userService.searchUsers(this.searchTerm).subscribe((resp:any)=>{
+      if(resp.ok){
+        this.foundUsers=resp.data;
+      }
+    });
+    
+  }
+
+  selectUser(user:User){
+    this.userReferenceText = user.name + " " + user.lastname;
+    this.associate.userReference=user;
+    this.show=false;
   }
 
  

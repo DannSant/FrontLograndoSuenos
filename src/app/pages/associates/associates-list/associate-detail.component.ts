@@ -12,6 +12,7 @@ import { NgForm } from '@angular/forms';
 import { UtilsService } from '../../../services/utils.service';
 import { Position } from '../../../models/position.model';
 import { PositionService } from '../../../services/position.service';
+import { User } from '../../../models/user.model';
 
 @Component({
   selector: 'app-associate-detail',
@@ -31,6 +32,12 @@ export class AssociateDetailComponent implements OnInit {
   };
 
   firstPosition:Position;
+
+  //Modal Control
+  userReferenceText="";
+  searchTerm="";
+  show=false;
+  foundUsers:User[]=[];
 
   errors:string="";
   phase:string="init";
@@ -72,6 +79,10 @@ export class AssociateDetailComponent implements OnInit {
           }
         
           this.associate = resp.data;
+          if (this.associate.userReference){
+            this.userReferenceText = this.associate.userReference.name + " " + this.associate.userReference.lastname
+          }
+        
         }else {
           this._alert.showAlert("Error","Error al recuperar datos del afiliado","error");
           this.associate={};
@@ -172,6 +183,33 @@ export class AssociateDetailComponent implements OnInit {
         this._alert.showAlert("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error");
       }
     });
+  }
+
+  showModal(){
+    this.searchTerm="";
+    this.foundUsers=[];
+    this.show=true;
+  }
+
+  searchUsers(){
+  
+    if (this.searchTerm==undefined || this.searchTerm.length<=3){
+      this.foundUsers=[];
+      return;
+    }
+    
+    this._userService.searchUsers(this.searchTerm).subscribe((resp:any)=>{
+      if(resp.ok){
+        this.foundUsers=resp.data;
+      }
+    });
+    
+  }
+
+  selectUser(user:User){
+    this.userReferenceText = user.name + " " + user.lastname;
+    this.associate.userReference=user;
+    this.show=false;
   }
 
 }

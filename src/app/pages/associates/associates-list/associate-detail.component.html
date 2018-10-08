@@ -9,15 +9,27 @@
                 <!-- NOMBRE DEL ASOCIADO -->
                 <div class="form-group">
                     <label for="name">Nombre</label>
-                    <input type="text" name="name" [(ngModel)]="associate.user.name" class="form-control" placeholder="Ingresar nombre" #name="ngModel" readonly>
+                    <input type="text" name="name" [(ngModel)]="associate.user.name" class="form-control" placeholder="Ingresar nombre" #name="ngModel">
 
                 </div>
 
                 <!-- APELLIDO DEL ASOCIADO -->
                 <div class="form-group">
                     <label for="lastname">Apellido</label>
-                    <input type="text" name="lastname" [(ngModel)]="associate.user.lastname" class="form-control" #lastname="ngModel" readonly>
+                    <input type="text" name="lastname" [(ngModel)]="associate.user.lastname" class="form-control" #lastname="ngModel">
 
+                </div>
+
+                <!-- REFERIDO DEL ASOCIADO -->
+                <div class="form-group" [ngClass]="{'has-danger': userReference.errors?.required && userReference.touched}" mat-raised-button matTooltip="Haz clic en el botón para buscar a la persona quien te invitó a formar parte de Logrando Sueños 7" matTooltipPosition="after"
+                    matTooltipClass="medium-tooltip">
+
+                    <label for="userReference">Referido *</label>
+                    <input type="text" name="userReference" class="form-control" [(ngModel)]="userReferenceText" #userReference="ngModel" required readonly>
+                    <button type="button" class="btn btn-primary" (click)="showModal()">Buscar</button>
+                    <div class="alert alert-danger" *ngIf="userReference.errors?.required && userReference.touched">
+                        <small>Este campo es requerido</small>
+                    </div>
                 </div>
 
                 <!-- EMAIL PERSONAL DEL ASOCIADO -->
@@ -164,5 +176,51 @@
             </form>
         </div>
 
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="fondo-negro animated fadeIn" [ngClass]="{'oculto': show==false}">
+    <div class="modal" style="display:block" tabindex="-1" role="dialog" id="searchUserModal">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button type="button" class="btn btn-danger" (click)="show=false">
+                                        Cancelar
+                                    </button>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Buscar usuario:</label>
+                                    <input type="text" class="form-control" id="searchInput" [(ngModel)]="searchTerm" (keyup)="searchUsers()" placeholder="Ingresa 3 letras">
+                                </div>
+                            </div>
+                            <div class=" col-md-8 ml-auto ">
+                                <table class="table ">
+                                    <thead class="thead-dark ">
+                                        <tr>
+                                            <th scope="col ">Nombre</th>
+                                            <th scope="col ">Apellidos</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let foundUser of foundUsers " (click)="selectUser(foundUser) ">
+                                            <td>{{foundUser.name}}</td>
+                                            <td>{{foundUser.lastname}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>div>
+        </div>
     </div>
 </div>

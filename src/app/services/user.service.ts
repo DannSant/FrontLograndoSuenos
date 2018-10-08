@@ -187,6 +187,16 @@ export class UserService {
     });
   }
 
+  searchUsers(term:string){
+    let url = SERVICE_URL + "/user/search/" + term;
+    let headers = new HttpHeaders({token:this.token})
+    return this.http.get(url,{headers}).catch((e)=>{      
+      let errorMessage = e.error.error.message;
+      //this._alert.showAlert("Error","Ha ocurrido un error al recuperar los usuarios de la base de datos. Intenta recargar la pagina","error");
+      return Observable.throw(e);
+    });
+  }
+
   getUser(id:string){
     let url = SERVICE_URL + "/user?id=" + id;
     let headers = new HttpHeaders({token:this.token})

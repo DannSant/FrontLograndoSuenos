@@ -15,7 +15,8 @@ export class Associate {
         public birthDate?:Date,       
         public state?: State, 
         public creationDate?:Date,
-        public user?:User,      
+        public user?:User,  
+        public userReference?:User,             
         public _id?:string
     ){}
 }
