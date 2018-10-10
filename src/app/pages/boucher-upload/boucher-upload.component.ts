@@ -28,7 +28,9 @@ export class BoucherUploadComponent implements OnInit {
     public router:Router
   ) {    
     activateRoute.params.subscribe((params)=>{
-      this._positions.getPosition(params.id).subscribe((resp:any)=>{       
+      this._alert.showWaitWindow("Cargando","Espere un momento por favor");
+      this._positions.getPosition(params.id).subscribe((resp:any)=>{ 
+        this._alert.closeWaitWindow();      
         if(resp.ok){
           this.position=resp.data;
          

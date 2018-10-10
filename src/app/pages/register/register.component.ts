@@ -136,13 +136,18 @@ export class RegisterComponent implements OnInit {
       return;
     }
 
+
+    this._alert.showWaitWindow("Cargando","Espere un momento por favor");
     this._associates.registerAssociate(this.associate,this.user,this.position).subscribe((resp:any)=>{
       //console.log(resp);
       if(resp.ok){
+        this._alert.closeWaitWindow();
         let id = resp.data.position._id;
         this.router.navigate(['/boucher',id]);
       }else {
-        this._alert.showAlert("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error");
+        this._alert.showAlertWithCallback("Error", "Ha ocurrido un problema al dar de alta al usuario.", "error",()=>{
+          this._alert.closeWaitWindow();
+        });
       }
     });
   }
