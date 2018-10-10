@@ -41,7 +41,7 @@ export class DownloadDatabaseComponent implements OnInit {
       'Base',
       {
         showLabels:true,
-        headers: ['NUM','USUARIO','NOMBRE','APELLIDO','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA','FECHA DE NACIMIENTO',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO']
+        headers: ['REFERIDO','NUM','USUARIO','NOMBRE','APELLIDO','PAGO REALIZADO','BANCO','CUENTA','CTA. CLABE','TARJETA','FECHA DE NACIMIENTO',	'CURP',	'RFC',	'MOVIL'	,'DOMICILIO','ESTADO']
       }
       
     );
@@ -51,6 +51,7 @@ export class DownloadDatabaseComponent implements OnInit {
     let db:any[] = []
     for (let position of this.positions){
       let row = {
+        referido:this._utils.validateUserCompleteName(position.associate.userReference,"SIN REFERIDO",1) + " " + this._utils.validateUserCompleteName(position.associate.userReference,"",2),
         num:position.position_number,
         usuario: this._utils.validateString(position.associate.user.username,"SIN USUARIO"),
         nombre: this._utils.validateString(position.associate.user.name,'SIN NOMBRE'),

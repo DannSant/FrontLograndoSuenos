@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Bank } from '../models/bank.model';
 import { State } from '../models/state.model';
+import { User } from '../models/user.model';
 
 @Injectable()
 export class UtilsService {
@@ -20,6 +21,34 @@ export class UtilsService {
     response = response.toString()
 
     return response;
+  }
+
+  validateUserCompleteName(user:User,defaultValue="nodata",type=1){
+   
+    if(!user){
+      return defaultValue;
+    }
+    if(type==1){
+      let response = user.name;
+      if(user.name==null){
+        response=defaultValue;
+      }else if(user.name==undefined){
+        response=defaultValue;
+      }else if(user.name==''){
+        response=defaultValue;
+      }
+      return response.toString();
+    }else {
+      let response = user.lastname;
+      if(user.lastname==null){
+        response=defaultValue;
+      }else if(user.lastname==undefined){
+        response=defaultValue;
+      }else if(user.lastname==''){
+        response=defaultValue;
+      }
+      return response.toString();
+    }
   }
 
   validateBank(bank:Bank,defaultVal:string){
@@ -126,12 +155,15 @@ export class UtilsService {
     let stringMonth = stringDate.split("-")[1]
     let stringYear = stringDate.split("-")[0]
     let newDate= new Date(stringYear,stringMonth,stringDay );
+
+ 
    
     let response=""
     let day = newDate.getDay() + 1
     let month = newDate.getMonth() + 1
     let year = newDate.getFullYear()
-    response = day + "-" + month + "-" + year
+    response = stringDay + "-" + stringMonth + "-" + stringYear
+    
     return response;
   }
 
