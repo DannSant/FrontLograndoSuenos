@@ -148,8 +148,8 @@
 
                 <!--DIRECCION DEL AFILIADO -->
                 <div class="form-group" [ngClass]="{'has-danger': address.errors && address.touched}">
-                    <label for="address">Direccion</label>
-                    <textarea name="address" [(ngModel)]="associate.address" class="form-control" id="address" rows="3" #address="ngModel"></textarea>
+                    <label for="address">Direccion *</label>
+                    <textarea name="address" [(ngModel)]="associate.address" class="form-control" id="address" rows="3" #address="ngModel" required></textarea>
                     <div class="alert alert-danger" *ngIf="address.errors?.required && address.touched">
                         <small>Este campo es requerido</small>
                     </div>
